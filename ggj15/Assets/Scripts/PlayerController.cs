@@ -42,7 +42,11 @@ public class PlayerController : MonoBehaviour
 
 		if( bRight ) 
 		{
-			transform.Translate( Vector3.right * 5f * Time.deltaTime );
+#if DEBUG_PAT
+			transform.Translate( Vector3.right * 5f * Time.deltaTime );//2
+#else
+			transform.Translate( Vector3.right * 2f * Time.deltaTime );
+#endif
 		}
 	}
 

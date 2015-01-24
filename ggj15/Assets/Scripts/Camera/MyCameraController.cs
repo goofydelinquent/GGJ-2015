@@ -20,10 +20,12 @@ public class MyCameraController : CameraController
 
 	private void Start()
 	{
+		m_offset.x = 2;
 		m_offset.y = PanelManager.Instance.PanelSize.y * 0.5f;
 		m_offset.z = -10.0f;
 
 		Vector3 targetPosition = PlayerController.Instance.transform.position;
+		targetPosition.x += m_offset.x;
 		targetPosition.y = m_offset.y;
 		targetPosition.z = m_offset.z;
 		transform.position = targetPosition;
@@ -38,6 +40,7 @@ public class MyCameraController : CameraController
 	{
 		Vector3 velocity = Vector3.zero;
 		Vector3 targetPosition = PlayerController.Instance.transform.position;
+		targetPosition.x += m_offset.x;
 		targetPosition.y = m_offset.y;
 		targetPosition.z = m_offset.z;
 		transform.position = Vector3.SmoothDamp( transform.position, targetPosition, ref velocity, 0.08f );

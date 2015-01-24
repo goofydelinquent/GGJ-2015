@@ -75,7 +75,11 @@ public class MemoryPanel : Panel
 
 				FadeController.Instance.FadeOut();
 
-				Invoke( "PlayerDelayControllable", 4.0f );
+#if DEBUG_PAT
+				Invoke( "PlayerDelayControllable", 1.0f );
+#else
+				Invoke( "PlayerDelayControllable", 5.0f );
+#endif
 			}
 		}
 	}

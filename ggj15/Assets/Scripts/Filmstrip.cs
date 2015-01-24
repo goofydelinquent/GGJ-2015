@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Filmstrip : MonoBehaviour
 {
-	private bool m_bCheckForPlayer = false;
+	private bool m_bCheckForPlayer = true;
 
 	void Update()
 	{
@@ -19,6 +19,6 @@ public class Filmstrip : MonoBehaviour
 
 	void OnBecameVisible()
 	{
-		m_bCheckForPlayer = true;
+		//m_bCheckForPlayer = true;
 	}
 }
