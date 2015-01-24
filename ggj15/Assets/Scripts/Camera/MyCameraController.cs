@@ -9,8 +9,6 @@ public class MyCameraController : CameraController
 	private static MyCameraController m_instance = null;
 	public static MyCameraController Instance { get { return m_instance; } }
 
-	[SerializeField]private GameObject m_testObject;
-
 	protected override void Awake()
 	{
 		base.Awake();
@@ -25,7 +23,7 @@ public class MyCameraController : CameraController
 		m_offset.y = PanelManager.Instance.PanelSize.y * 0.5f;
 		m_offset.z = -10.0f;
 
-		Vector3 targetPosition = m_testObject.transform.position;
+		Vector3 targetPosition = PlayerController.Instance.transform.position;
 		targetPosition.y = m_offset.y;
 		targetPosition.z = m_offset.z;
 		transform.position = targetPosition;
@@ -38,10 +36,8 @@ public class MyCameraController : CameraController
 
 	private void LateUpdate()
 	{
-		if( m_testObject == null ) { return; }
-
 		Vector3 velocity = Vector3.zero;
-		Vector3 targetPosition = m_testObject.transform.position;
+		Vector3 targetPosition = PlayerController.Instance.transform.position;
 		targetPosition.y = m_offset.y;
 		targetPosition.z = m_offset.z;
 		transform.position = Vector3.SmoothDamp( transform.position, targetPosition, ref velocity, 0.08f );

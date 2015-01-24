@@ -17,7 +17,6 @@ public class FocusEffect : ImageEffectBase {
 	private int 		m_screenWidth;
 	private int			m_screenHeight;
 
-	public 	Transform 	m_player;
 	public 	float 		m_threshold = 50f;
 	private float		m_plateau = 0.5f;
 	
@@ -55,7 +54,7 @@ public class FocusEffect : ImageEffectBase {
 
 		foreach ( FocusBeacon b in FocusBeacon.S_BEACONS ) {
 
-			float distance = Mathf.Abs( m_player.transform.position.x - b.transform.position.x );
+			float distance = Mathf.Abs( PlayerController.Instance.transform.position.x - b.transform.position.x );
 			if ( distance <= minDistance ) {
 				closest = b;
 				minDistance = distance;
