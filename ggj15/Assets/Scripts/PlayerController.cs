@@ -12,12 +12,26 @@ public class PlayerController : MonoBehaviour
 		m_instance = this;
 	}
 
-	void Update ()
+	bool bRight = false;
+
+	void Update()
 	{
-		if (Input.GetKey (KeyCode.RightArrow)) 
+		if( Input.GetKey( KeyCode.RightArrow ) ) 
 		{
-			float x = transform.position.x + (2.0f * Time.deltaTime);
-			transform.position = new Vector2( x, transform.position.y);
+			bRight = true;
+		}
+		else
+		{
+			bRight = false;
+		}
+	}
+
+
+	void FixedUpdate()
+	{
+		if( bRight ) 
+		{
+			transform.Translate( Vector3.right * 2.0f * Time.deltaTime );
 		}
 	}
 
