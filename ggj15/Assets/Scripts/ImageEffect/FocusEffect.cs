@@ -44,7 +44,6 @@ public class FocusEffect : ImageEffectBase {
 		GL.LoadPixelMatrix( 0, m_screenWidth, m_screenHeight, 0 );
 
 		float scaleFactor = 768f / m_screenHeight;
-
 		float minDistance = float.PositiveInfinity;
 
 		foreach ( FocusBeacon b in FocusBeacon.S_BEACONS ) {
@@ -60,6 +59,8 @@ public class FocusEffect : ImageEffectBase {
 
 		}
 
+		GL.PopMatrix();
+
 		if ( minDistance > m_threshold ) {
 			Graphics.Blit( source, destination );
 			return;
@@ -67,7 +68,7 @@ public class FocusEffect : ImageEffectBase {
 
 		material.SetFloat("_FocusFactor", ( minDistance / m_threshold ) );
 
-		GL.PopMatrix();
+
 		RenderTexture.active = null;
 		//Graphics.Blit( rt, destination );
 
