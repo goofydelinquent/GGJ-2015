@@ -10,12 +10,14 @@ public class PanelManager : MonoBehaviour
 
 	private Queue<GameObject> m_queue;
 
+	// Total count of panels from start of game.
 	private int m_totalPanelCounter = 0;
 	public int TotalPanelCounter { get { return m_totalPanelCounter; } }
 
+	// Index of panel where the player is currently in. Triggered on Filmstrip entry.
 	private int m_currentPanelIndex = 0;
 	public int CurrentPanelIndex { get { return m_currentPanelIndex; } }
-
+	
 	private Vector2 m_panelSize = new Vector3( 10.24f, 7.68f );
 	public Vector2 PanelSize { get { return m_panelSize; } }
 
