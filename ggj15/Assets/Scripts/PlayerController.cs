@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
 	private static PlayerController m_instance;
 	public static PlayerController Instance { get { return m_instance; } }
 
+	private bool m_bControllable = true;
+	public bool Controllable { get { return m_bControllable; } set { m_bControllable = value; } }
+
 	private void Awake()
 	{
 		m_instance = this;
@@ -29,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
 	void FixedUpdate()
 	{
+		if( !m_bControllable ) { return; }
+
 		if( bRight ) 
 		{
 			transform.Translate( Vector3.right * 2.0f * Time.deltaTime );
