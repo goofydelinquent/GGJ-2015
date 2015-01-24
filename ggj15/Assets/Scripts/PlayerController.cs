@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
 		if( bRight ) 
 		{
-			transform.Translate( Vector3.right * 2.0f * Time.deltaTime );
+			transform.Translate( Vector3.right * 5.0f * Time.deltaTime );
 		}
 	}
 
