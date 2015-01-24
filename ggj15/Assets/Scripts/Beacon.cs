@@ -26,6 +26,7 @@ public class Beacon : MonoBehaviour {
 
 		m_beacon.transform.SetParent (m_positions [Random.Range (0, m_positions.Count)]);
 		m_beacon.transform.localPosition = Vector3.zero;
+		transform.position = m_beacon.transform.position;
 	}
 
 	public Vector3 GetPosition()

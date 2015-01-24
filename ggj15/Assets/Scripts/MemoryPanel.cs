@@ -46,9 +46,9 @@ public class MemoryPanel : Panel
 
 		if( PanelManager.Instance.CurrentPanelIndex != m_index ) { return; }
 
-		m_distance = Vector2.Distance( PlayerController.Instance.transform.position, m_trigger.transform.position );
+		//m_distance = Vector2.Distance( PlayerController.Instance.transform.position, m_trigger.transform.position );
 
-		m_bCheckForInput = m_distance < 1.5f;
+		m_bCheckForInput = Mathf.Abs(PlayerController.Instance.transform.position.x - m_trigger.transform.position.x) < 1.5f;
 
 		m_text.gameObject.SetActive( m_bCheckForInput );
 
