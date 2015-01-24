@@ -10,9 +10,13 @@ public class PlayerController : MonoBehaviour
 	private bool m_bControllable = true;
 	public bool Controllable { get { return m_bControllable; } set { m_bControllable = value; } }
 
+	private Animator m_animator;
+
 	private void Awake()
 	{
 		m_instance = this;
+
+		m_animator = GetComponent<Animator>();
 	}
 
 	bool bRight = false;
@@ -27,6 +31,8 @@ public class PlayerController : MonoBehaviour
 		{
 			bRight = false;
 		}
+
+		m_animator.SetBool( "bWalk", bRight );
 	}
 
 
@@ -36,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
 		if( bRight ) 
 		{
-			transform.Translate( Vector3.right * 5.0f * Time.deltaTime );
+			transform.Translate( Vector3.right * 1.5f * Time.deltaTime );
 		}
 	}
 
