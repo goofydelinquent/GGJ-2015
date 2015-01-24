@@ -11,8 +11,9 @@ public class PanelManager : MonoBehaviour
 	private Queue<GameObject> m_queue;
 
 	private int m_totalPanelCounter = 0;
-	private int m_currentPanelIndex = 0;
+	public int TotalPanelCounter { get { return m_totalPanelCounter; } }
 
+	private int m_currentPanelIndex = 0;
 	public int CurrentPanelIndex { get { return m_currentPanelIndex; } }
 
 	private Vector2 m_panelSize = new Vector3( 10.24f, 7.68f );
@@ -33,15 +34,7 @@ public class PanelManager : MonoBehaviour
 		m_instance = null;
 	}
 
-	private void OnGUI()
-	{
-		if( GUI.Button( new Rect( 20, 20, 200, 200 ), "ADD" ) )
-		{
-			RequestPanel();
-		}
-	}
-
-	private void RequestPanel()
+	public void RequestPanel()
 	{
 		// Instantiate specific panel here.
 		GameObject panelObject = Instantiate( Resources.Load( "Prefabs/Panels/Panel" ) ) as GameObject;
@@ -56,7 +49,7 @@ public class PanelManager : MonoBehaviour
 
 		m_queue.Enqueue( panelObject );
 
-		if( m_totalPanelCounter > 2 )
+		if( m_totalPanelCounter > 3 )
 		{
 			Destroy( m_queue.Dequeue() );
 		}
