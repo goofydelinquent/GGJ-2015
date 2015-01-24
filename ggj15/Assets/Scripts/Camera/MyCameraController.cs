@@ -27,6 +27,8 @@ public class MyCameraController : CameraController
 
 	private void LateUpdate()
 	{
+		if( m_testObject == null ) { return; }
+
 		Vector3 velocity = Vector3.zero;
 		Vector3 targetPosition = m_testObject.transform.position + CAMERA_OFFSET;
 		transform.position = Vector3.SmoothDamp( transform.position, targetPosition, ref velocity, 0.08f );
