@@ -8,9 +8,9 @@ public class Beacon : MonoBehaviour {
 	public Transform m_position;
 
 	//public List<int> m_memory = new List<int>();
-	public string[] m_memoryName;
+	public Sprite[] m_memories;
 	private List<Transform> m_positions = new List<Transform>();
-	private string m_memoryAddress = "";
+	private Sprite m_memory;
 
 	// Use this for initialization
 	void Awake () 
@@ -22,20 +22,14 @@ public class Beacon : MonoBehaviour {
 				m_positions.Add(child);
 			}
 		}
-
-		m_memoryAddress = m_memoryName[Random.Range(0, m_memoryName.Length)];
+		m_memory = m_memories[Random.Range(0, m_memories.Length)];
 
 		m_beacon.transform.SetParent (m_positions [Random.Range (0, m_positions.Count)]);
 		m_beacon.transform.localPosition = Vector3.zero;
 	}
 
-	public Vector3 GetPosition()
+	public Sprite Memory
 	{
-		return m_beacon.transform.position;
-	}
-
-	public string MemoryFileAddress
-	{
-		get { return m_memoryAddress; }
+		get { return m_memory; }
 	}
 }

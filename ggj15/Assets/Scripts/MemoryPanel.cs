@@ -63,7 +63,9 @@ public class MemoryPanel : Panel
 
 				m_text.gameObject.SetActive( false );
 
-				MemoryController.Instance.ShowMemory( "" );
+				Sprite memory = m_trigger.transform.GetComponent<Beacon>().Memory;
+
+				MemoryController.Instance.ShowMemory( memory );
 
 				Destroy( m_trigger.gameObject );
 

@@ -25,8 +25,10 @@ public class MemoryController : MonoBehaviour
 		m_instance = null;
 	}
 
-	public void ShowMemory( string p_image )
+	public void ShowMemory( Sprite p_image )
 	{
+		//m_spriteRenderer.sprite = Resources.Load( "Sprites/Panels/" + p_image ) as Sprite;
+		m_spriteRenderer.sprite = p_image;
 		transform.position = new Vector3( PanelManager.Instance.PanelSize.x * PanelManager.Instance.CurrentPanelIndex, 0, 0 );
 		gameObject.SetActive( true );
 		iTween.FadeTo( gameObject, 1.0f, 0.0f );
