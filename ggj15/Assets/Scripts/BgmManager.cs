@@ -69,11 +69,11 @@ public class BgmManager : MonoBehaviour {
 		if ( m_currentBufferIndex >= 0 ) {
 			
 			m_trackBuffers[ m_currentBufferIndex ].Play();
-			SetNextTrack( MusicType.Intro );
+			SetNextTrack( MusicType.Intro, true );
 			
 		}
 
-		SetNextTrack(MusicType.Body, false );
+		//SetNextTrack(MusicType.Body, false );
 		/* DBG_NEXTRACK - Used for testing
 		SetNextTrack( 0 );
 		//*/

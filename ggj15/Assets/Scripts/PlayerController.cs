@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
 	private Animator m_animator;
 
+	private bool m_bIsWalkForced = false;
+
 	private void Awake()
 	{
 		m_instance = this;
@@ -32,13 +34,29 @@ public class PlayerController : MonoBehaviour
 			bRight = false;
 		}
 
+		if ( m_bIsWalkForced ) {
+			bRight = true;
+		}
+
 		m_animator.SetBool( "bWalk", bRight );
+	}
+
+	public void ForceSetWalking( bool p_bIsWalking ) {
+		m_bIsWalkForced = p_bIsWalking;
 	}
 
 
 	void FixedUpdate()
 	{
-		if( !m_bControllable ) { return; }
+		if ( !m_bIsWalkForced && !m_bControllable) { return; }
+		Debug.Log( "walking");
+
+		//bypass debug
+		if ( m_bIsWalkForced ) {
+			transform.Translate( Vector3.right * 2f * Time.deltaTime );
+			return;
+		}
+
 
 		if( bRight ) 
 		{

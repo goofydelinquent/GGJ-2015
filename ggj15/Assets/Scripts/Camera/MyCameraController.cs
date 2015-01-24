@@ -5,6 +5,7 @@ public class MyCameraController : CameraController
 {
 	private const int FRAME_RATE_TARGET		= 60;
 	private Vector3 m_offset = Vector3.zero;
+	private bool m_bIsFollowingPlayer = true;
 
 	private static MyCameraController m_instance = null;
 	public static MyCameraController Instance { get { return m_instance; } }
@@ -24,6 +25,8 @@ public class MyCameraController : CameraController
 		m_offset.y = PanelManager.Instance.PanelSize.y * 0.5f;
 		m_offset.z = -10.0f;
 
+		if ( ! m_bIsFollowingPlayer ) { return; }
+
 		Vector3 targetPosition = PlayerController.Instance.transform.position;
 		targetPosition.x += m_offset.x;
 		targetPosition.y = m_offset.y;
@@ -36,8 +39,13 @@ public class MyCameraController : CameraController
 		m_instance = null;
 	}
 
+	public void SetFollowPlayer( bool p_bWillFollowPlayer ) {
+		m_bIsFollowingPlayer = p_bWillFollowPlayer;
+	}
+
 	private void LateUpdate()
 	{
+		if ( ! m_bIsFollowingPlayer ) { return; }
 		Vector3 velocity = Vector3.zero;
 		Vector3 targetPosition = PlayerController.Instance.transform.position;
 		targetPosition.x += m_offset.x;
