@@ -5,12 +5,15 @@
 public class FocusEffect : ImageEffectBase {
 	public RenderTexture rt;
 	public Texture  m_textureFocus;
-	public float    m_focusFactor;
+	private float    m_focusFactor;
 
 	public Texture m_baseTexture;
 
 	private int m_screenWidth;
 	private int m_screenHeight;
+
+	public Transform m_player;
+	public float m_threshold = 50f;
 
 	void Start () {
 
@@ -34,15 +37,35 @@ public class FocusEffect : ImageEffectBase {
 		Graphics.Blit( m_baseTexture, rt );
 
 		material.SetTexture("_FocusTex", m_textureFocus);
-		material.SetFloat("_FocusFactor", m_focusFactor);
+
 
 		RenderTexture.active = rt;
 		GL.PushMatrix();
 		GL.LoadPixelMatrix( 0, m_screenWidth, m_screenHeight, 0 );
 
-		float scaleFactor = 1f; //1024f / m_screenHeight;
+		float scaleFactor = 768f / m_screenHeight;
 
-		Graphics.DrawTexture( new Rect( 0, 0, scaleFactor * 250, scaleFactor * 250 ), m_textureFocus );
+		float minDistance = float.PositiveInfinity;
+
+		foreach ( FocusBeacon b in FocusBeacon.S_BEACONS ) {
+
+			float distance = Mathf.Abs( (m_player.transform.position - b.transform.position).magnitude );
+			minDistance = Mathf.Min( minDistance, distance );
+
+			Vector3 position = Camera.main.WorldToScreenPoint( b.transform.position );
+			float size = ( b.m_radius * scaleFactor ) / 2f;
+
+			Graphics.DrawTexture( new Rect( position.x - (size / 2f), m_screenHeight - position.y - (size / 2f),
+			                               size, size), m_textureFocus );
+
+		}
+
+		if ( minDistance > m_threshold ) {
+			Graphics.Blit( source, destination );
+			return;
+		}
+
+		material.SetFloat("_FocusFactor", ( minDistance / m_threshold ) );
 
 		GL.PopMatrix();
 		RenderTexture.active = null;
