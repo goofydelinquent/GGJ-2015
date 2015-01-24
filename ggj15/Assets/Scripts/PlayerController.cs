@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
 	{
 		if (Input.GetKey (KeyCode.RightArrow)) 
 		{
-			Debug.Log(">>>>>>");
 			float x = transform.position.x + (2.0f * Time.deltaTime);
 			transform.position = new Vector2( x, transform.position.y);
 		}
