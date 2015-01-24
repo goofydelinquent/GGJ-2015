@@ -15,6 +15,7 @@ public class FocusEffect : ImageEffectBase {
 
 	public 	Transform 	m_player;
 	public 	float 		m_threshold = 50f;
+	private float		m_plateau = 1.3f;
 	
 	void Start () {
 
@@ -46,10 +47,20 @@ public class FocusEffect : ImageEffectBase {
 		float scaleFactor = 1024f / m_screenWidth;
 		float minDistance = float.PositiveInfinity;
 
+		FocusBeacon closest = null;
+
 		foreach ( FocusBeacon b in FocusBeacon.S_BEACONS ) {
 
 			float distance = Mathf.Abs( m_player.transform.position.x - b.transform.position.x );
-			minDistance = Mathf.Min( minDistance, distance );
+			if ( distance < minDistance ) {
+				closest = b;
+				minDistance = distance;
+			}
+		}
+
+		if ( closest != null ) {
+
+			FocusBeacon b = closest;
 
 			Vector3 position = Camera.main.WorldToScreenPoint( b.transform.position );
 			float size = b.m_radius * scaleFactor;
@@ -72,7 +83,7 @@ public class FocusEffect : ImageEffectBase {
 			return;
 		}
 
-		material.SetFloat("_FocusFactor", ( minDistance / m_threshold ) );
+		material.SetFloat("_FocusFactor", Mathf.Min ( ( minDistance * m_plateau ) / m_threshold, 1.0f ) );
 
 
 		RenderTexture.active = null;
