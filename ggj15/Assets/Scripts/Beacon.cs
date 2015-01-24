@@ -13,7 +13,7 @@ public class Beacon : MonoBehaviour {
 	private string m_memoryAddress = "";
 
 	// Use this for initialization
-	void Start () 
+	void Awake () 
 	{
 		foreach (Transform child in m_position)
 		{
@@ -27,6 +27,11 @@ public class Beacon : MonoBehaviour {
 
 		m_beacon.transform.SetParent (m_positions [Random.Range (0, m_positions.Count)]);
 		m_beacon.transform.localPosition = Vector3.zero;
+	}
+
+	public Vector3 GetPosition()
+	{
+		return m_beacon.transform.position;
 	}
 
 	public string MemoryFileAddress
