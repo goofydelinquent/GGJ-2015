@@ -18,11 +18,19 @@ public class MemoryPanel : Panel
 
 	protected override void Start() 
 	{
+		if( m_trigger == null ) { return; }
+
 		m_key = GetLetter().ToString();
 
 		GameObject bubbleObject = Instantiate( Resources.Load( "Prefabs/Bubble" ) ) as GameObject;
 		bubbleObject.transform.parent = transform;
-		bubbleObject.transform.position = m_trigger.transform.position;
+
+		Beacon beacon = m_trigger.GetComponent<Beacon>();
+
+		if( beacon != null ) {
+			bubbleObject.transform.position = beacon.GetPosition() + new Vector3( 1, -1, 0 );
+		}
+
 		m_text = bubbleObject.GetComponent<TextMesh>();
 
 		m_text.gameObject.SetActive( false );
@@ -32,6 +40,8 @@ public class MemoryPanel : Panel
 
 	protected override void Update() 
 	{
+		if( m_trigger == null ) { return; }
+
 		if( m_bDone ) { return; }
 
 		if( PanelManager.Instance.CurrentPanelIndex != m_index ) { return; }
@@ -47,12 +57,15 @@ public class MemoryPanel : Panel
 			if( Input.GetKeyDown( (KeyCode)Enum.Parse( typeof( KeyCode ), m_key ) ) )
 			{
 				PanelManager.Instance.RequestPanel();
+				PanelManager.Instance.RequestPanel( false );
 
 				Debug.Log( "KEY DOWN" );
 
 				m_text.gameObject.SetActive( false );
 
-				MemoryController.Instance.ShowMemory( "" );
+				Sprite memory = m_trigger.transform.GetComponent<Beacon>().Memory;
+
+				MemoryController.Instance.ShowMemory( memory );
 
 				Destroy( m_trigger.gameObject );
 
@@ -60,7 +73,9 @@ public class MemoryPanel : Panel
 
 				PlayerController.Instance.Controllable = false;
 
-				Invoke( "PlayerDelayControllable", 3.0f );
+				FadeController.Instance.FadeOut();
+
+				Invoke( "PlayerDelayControllable", 4.0f );
 			}
 		}
 	}
