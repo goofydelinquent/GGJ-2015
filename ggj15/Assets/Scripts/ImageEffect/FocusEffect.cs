@@ -15,7 +15,7 @@ public class FocusEffect : ImageEffectBase {
 
 	public 	Transform 	m_player;
 	public 	float 		m_threshold = 50f;
-
+	
 	void Start () {
 
 		m_screenWidth = Screen.width;
@@ -24,7 +24,7 @@ public class FocusEffect : ImageEffectBase {
 		rt = new RenderTexture( m_screenWidth, m_screenHeight, 32 );
 		Graphics.Blit( m_baseTexture, rt );
 	}
-	
+
 	void OnRenderImage (RenderTexture source, RenderTexture destination) {
 
 		if ( m_screenWidth != Screen.width || m_screenHeight != Screen.height ) {
@@ -43,7 +43,7 @@ public class FocusEffect : ImageEffectBase {
 		GL.PushMatrix();
 		GL.LoadPixelMatrix( 0, m_screenWidth, m_screenHeight, 0 );
 
-		float scaleFactor = 768f / m_screenHeight;
+		float scaleFactor = 1024f / m_screenWidth;
 		float minDistance = float.PositiveInfinity;
 
 		foreach ( FocusBeacon b in FocusBeacon.S_BEACONS ) {
@@ -52,14 +52,15 @@ public class FocusEffect : ImageEffectBase {
 			minDistance = Mathf.Min( minDistance, distance );
 
 			Vector3 position = Camera.main.WorldToScreenPoint( b.transform.position );
-			float size = ( b.m_radius * scaleFactor ) / 2f;
+			float size = b.m_radius * scaleFactor;
 
 			float yPosition = position.y;
 			if ( ! ( Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer ) ) {
 				yPosition = m_screenHeight - yPosition;
+			} else {
+				yPosition = position.y;
 			}
-			yPosition = yPosition - (size / 2 );
-			Graphics.DrawTexture( new Rect( position.x - (size / 2f), yPosition,
+			Graphics.DrawTexture( new Rect( position.x - (size / 2f ), yPosition  - (size / 2 ),
 			                               size, size), m_textureFocus );
 
 		}
