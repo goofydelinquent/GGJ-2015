@@ -49,7 +49,6 @@ public class PlayerController : MonoBehaviour
 	void FixedUpdate()
 	{
 		if ( !m_bIsWalkForced && !m_bControllable) { return; }
-		Debug.Log( "walking");
 
 		//bypass debug
 		if ( m_bIsWalkForced ) {

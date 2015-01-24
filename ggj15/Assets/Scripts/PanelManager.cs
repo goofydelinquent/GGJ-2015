@@ -29,21 +29,57 @@ public class PanelManager : MonoBehaviour
 
 	private bool m_bDone = false;
 
+
 	private void Awake()
 	{
 		m_instance = this;
 
 		m_list = new LinkedList<Panel>();
 
-		RequestPanel();
+		RequestPanel( false );
 		RequestPanel( false );
 		RequestPanel();
 		RequestPanel( false );
+
+		RequestPanel();
+		RequestPanel( false );
+
+		RequestPanel();
+		RequestPanel( false );
+		RequestPanel( false );
+		RequestPanel();
+		RequestPanel( false );
+
 	}
 
 	private void OnDestroy()
 	{
 		m_instance = null;
+	}
+
+	public void AddSequence() {
+		int sequenceType = Random.Range( 0, 2 );
+		switch( sequenceType ) {
+			case 0: {
+				RequestPanel( true );
+				RequestPanel( false );
+				RequestPanel( false );
+				break;
+			}
+			case 1: {
+				RequestPanel( false );
+				RequestPanel( true );
+				RequestPanel( false );
+				break;
+			}
+				case 2: {
+				RequestPanel( false );
+				RequestPanel( false );
+				RequestPanel( true );
+				break;
+			}
+		}
+
 	}
 
 	public void RequestPanel( bool p_bWithTrigger = true )
@@ -84,6 +120,8 @@ public class PanelManager : MonoBehaviour
 	public void IncrementCurrentIndex()
 	{
 		m_currentPanelIndex++;
+
+		Debug.Log( "Incrementing Current Index. Now at: " + m_currentPanelIndex );
 
 		// Current Node set.
 		if( m_node == null ) {
@@ -129,10 +167,12 @@ public class PanelManager : MonoBehaviour
 
 	private bool CheckForNode( LinkedListNode<Panel> p_startNode, int p_count )
 	{
-		LinkedListNode<Panel> node = null;
+		if ( p_startNode == null ) { return false; }
+
+		LinkedListNode<Panel> node = p_startNode;
 
 		for( int i = 0; i < p_count; i++ ){
-			node = p_startNode.Next;
+			node = node.Next;
 
 			if( node == null ) {
 				return false;

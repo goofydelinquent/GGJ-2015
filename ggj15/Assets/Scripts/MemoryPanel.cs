@@ -56,8 +56,7 @@ public class MemoryPanel : Panel
 		{
 			if( Input.GetKeyDown( (KeyCode)Enum.Parse( typeof( KeyCode ), m_key ) ) )
 			{
-				PanelManager.Instance.RequestPanel();
-				PanelManager.Instance.RequestPanel( false );
+				PanelManager.Instance.AddSequence();
 
 				Debug.Log( "KEY DOWN" );
 

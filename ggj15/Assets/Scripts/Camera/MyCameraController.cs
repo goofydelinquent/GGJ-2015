@@ -46,6 +46,7 @@ public class MyCameraController : CameraController
 	private void LateUpdate()
 	{
 		if ( ! m_bIsFollowingPlayer ) { return; }
+
 		Vector3 velocity = Vector3.zero;
 		Vector3 targetPosition = PlayerController.Instance.transform.position;
 		targetPosition.x += m_offset.x;
