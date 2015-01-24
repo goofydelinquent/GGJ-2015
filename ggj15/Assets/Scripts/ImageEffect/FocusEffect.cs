@@ -3,17 +3,18 @@
 [ExecuteInEditMode]
 [AddComponentMenu("Image Effects/Color Adjustments/Grayscale")]
 public class FocusEffect : ImageEffectBase {
-	public RenderTexture rt;
-	public Texture  m_textureFocus;
-	private float    m_focusFactor;
+	private RenderTexture rt;
+	public 	Texture  	m_textureFocus;
+	private float    	m_focusFactor;
+	public 	float     	m_greyscaleRamp = 0f;
 
-	public Texture m_baseTexture;
+	public 	Texture 	m_baseTexture;
 
-	private int m_screenWidth;
-	private int m_screenHeight;
+	private int 		m_screenWidth;
+	private int			m_screenHeight;
 
-	public Transform m_player;
-	public float m_threshold = 50f;
+	public 	Transform 	m_player;
+	public 	float 		m_threshold = 50f;
 
 	void Start () {
 
@@ -24,7 +25,6 @@ public class FocusEffect : ImageEffectBase {
 		Graphics.Blit( m_baseTexture, rt );
 	}
 	
-	// Called by camera to apply image effect
 	void OnRenderImage (RenderTexture source, RenderTexture destination) {
 
 		if ( m_screenWidth != Screen.width || m_screenHeight != Screen.height ) {
@@ -37,7 +37,7 @@ public class FocusEffect : ImageEffectBase {
 		Graphics.Blit( m_baseTexture, rt );
 
 		material.SetTexture("_FocusTex", m_textureFocus);
-
+		material.SetFloat("_GreyscaleRamp", m_greyscaleRamp );
 
 		RenderTexture.active = rt;
 		GL.PushMatrix();
@@ -59,7 +59,6 @@ public class FocusEffect : ImageEffectBase {
 				yPosition = m_screenHeight - yPosition;
 			}
 			yPosition = yPosition - (size / 2 );
-
 			Graphics.DrawTexture( new Rect( position.x - (size / 2f), yPosition,
 			                               size, size), m_textureFocus );
 
