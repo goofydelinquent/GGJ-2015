@@ -54,7 +54,13 @@ public class FocusEffect : ImageEffectBase {
 			Vector3 position = Camera.main.WorldToScreenPoint( b.transform.position );
 			float size = ( b.m_radius * scaleFactor ) / 2f;
 
-			Graphics.DrawTexture( new Rect( position.x - (size / 2f), m_screenHeight - position.y - (size / 2f),
+			float yPosition = position.y;
+			if ( ! ( Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer ) ) {
+				yPosition = m_screenHeight - yPosition;
+			}
+			yPosition = yPosition - (size / 2 );
+
+			Graphics.DrawTexture( new Rect( position.x - (size / 2f), yPosition,
 			                               size, size), m_textureFocus );
 
 		}
