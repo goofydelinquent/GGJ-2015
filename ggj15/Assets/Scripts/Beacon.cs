@@ -28,6 +28,11 @@ public class Beacon : MonoBehaviour {
 		m_beacon.transform.localPosition = Vector3.zero;
 	}
 
+	public Vector3 GetPosition()
+	{
+		return m_beacon.transform.position;
+	}
+
 	public Sprite Memory
 	{
 		get { return m_memory; }
