@@ -53,7 +53,8 @@ public class PanelManager : MonoBehaviour
 		}
 
 		// Instantiate specific panel here.
-		GameObject panelObject = Instantiate( Resources.Load( "Prefabs/Panels/" + ( p_bWithTrigger ? "panel_park_memory_bench1" : "panel_filler0" ) ) ) as GameObject;
+		GameObject[] panels = p_bWithTrigger ? m_triggerPanels : m_fillerPanels;
+		GameObject panelObject = Instantiate( panels[Random.Range( 0, panels.Length )] ) as GameObject;
 		panelObject.transform.parent = transform;
 		panelObject.transform.position = new Vector3( m_panelSize.x * m_totalPanelCounter, 0, 0 );
 
@@ -62,7 +63,6 @@ public class PanelManager : MonoBehaviour
 		stripObject.transform.position = new Vector3( m_panelSize.x * ( m_totalPanelCounter + 1 ), m_panelSize.y * 0.5f, 0 );
 
 		Panel panel = panelObject.GetComponent<Panel>();
-
 		panel.Index = m_totalPanelCounter;
 
 		m_list.AddLast( panel );
@@ -85,54 +85,44 @@ public class PanelManager : MonoBehaviour
 	{
 		m_currentPanelIndex++;
 
-		if( m_bDone )
-		{
-			return;
-		}
-
 		// Current Node set.
-		if( m_node == null )
-		{
+		if( m_node == null ) {
 			m_node = m_list.First.Next;
 		}
-		else
-		{
+		else {
 			m_node = m_node.Next;
 		}
 
-		if( m_node != null )
+		if( m_currentPanelIndex > 1 )
 		{
-			LinkedListNode<Panel> nodeToRemove = m_node.Previous.Previous;
-
-			if( nodeToRemove != null )
-			{
-
-				m_list.Remove ( nodeToRemove );
-				Destroy( nodeToRemove.Value.gameObject );
-				Debug.Log("DESTROY" );
-			}
+			LinkedListNode<Panel> node = m_list.First;
+			m_list.RemoveFirst();
+			Destroy( node.Value.gameObject );
+			Debug.Log( "DESTROY" );
 		}
 
 		Debug.Log("COUNT A: " + m_list.Count);
 
 		//Debug.Log( "Current panel index: " + m_currentPanelIndex );
 
-		// End Check.
-		if( m_node != null )
+		if( m_bDone )
 		{
-			if( m_bTryToEnd )
-			{
-				if( CheckForNode( m_node, 2 ) ) {
-					m_bDone = true;
-					Debug.Log( "DONE" );
-				}
+			return;
+		}
+
+		// End Check.
+		if( m_bTryToEnd )
+		{
+			if( CheckForNode( m_node, 1 ) ) {
+				m_bDone = true;
+				Debug.Log( "DONE" );
 			}
-			else
-			{
-				if( CheckForNode( m_node, 3 ) ) {
-					m_bTryToEnd = true;
-					Debug.Log( "TRY TO END" );
-				}
+		}
+		else
+		{
+			if( m_list.Count <= 4 ) {
+				m_bTryToEnd = true;
+				Debug.Log( "TRY TO END" );
 			}
 		}
 	}

@@ -33,7 +33,11 @@ public class MemoryController : MonoBehaviour
 		gameObject.SetActive( true );
 		iTween.FadeTo( gameObject, 1.0f, 0.0f );
 
-		Invoke( "DelayedFadeOut", 3.65f );
+#if DEBUG_PAT
+		Invoke( "DelayedFadeOut", 0.65f );
+#else
+		Invoke( "DelayedFadeOut", 4.65f );
+#endif
 	}
 
 	private void DelayedFadeOut()
