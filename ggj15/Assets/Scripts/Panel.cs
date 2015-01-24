@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Panel : MonoBehaviour {
+public class Panel : MonoBehaviour
+{
+	protected int m_index;
+	public int Index { get { return m_index; } set { m_index = value; } }
 
-	// Use this for initialization
-	protected virtual void Start () 
+	protected virtual void Start() 
 	{
 
 	}
-	
-	// Update is called once per frame
-	protected virtual void Update () 
+
+	protected virtual void Update() 
 	{
 
 	}

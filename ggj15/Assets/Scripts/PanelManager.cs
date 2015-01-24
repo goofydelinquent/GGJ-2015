@@ -13,6 +13,8 @@ public class PanelManager : MonoBehaviour
 	private int m_totalPanelCounter = 0;
 	private int m_currentPanelIndex = 0;
 
+	public int CurrentPanelIndex { get { return m_currentPanelIndex; } }
+
 	private Vector2 m_panelSize = new Vector3( 10.24f, 7.68f );
 	public Vector2 PanelSize { get { return m_panelSize; } }
 
@@ -42,13 +44,15 @@ public class PanelManager : MonoBehaviour
 	private void RequestPanel()
 	{
 		// Instantiate specific panel here.
-		GameObject panelObject = Instantiate( Resources.Load( "Prefabs/Panels/panel" ) ) as GameObject;
+		GameObject panelObject = Instantiate( Resources.Load( "Prefabs/Panels/Panel" ) ) as GameObject;
 		panelObject.transform.parent = transform;
 		panelObject.transform.position = new Vector3( m_panelSize.x * m_totalPanelCounter, 0, 0 );
 
-		GameObject stripObject = Instantiate( Resources.Load( "Prefabs/filmstrip" ) ) as GameObject;
+		GameObject stripObject = Instantiate( Resources.Load( "Prefabs/Filmstrip" ) ) as GameObject;
 		stripObject.transform.parent = panelObject.transform;
 		stripObject.transform.position = new Vector3( m_panelSize.x * ( m_totalPanelCounter + 1 ), m_panelSize.y * 0.5f, 0 );
+
+		panelObject.GetComponent<Panel>().Index = m_totalPanelCounter;
 
 		m_queue.Enqueue( panelObject );
 
