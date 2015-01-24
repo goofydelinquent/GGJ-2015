@@ -4,7 +4,7 @@ using System.Collections;
 public class MyCameraController : CameraController
 {
 	private const int FRAME_RATE_TARGET		= 60;
-	private Vector3 CAMERA_OFFSET	 		= new Vector3( 0, 0, -10.0f );
+	private Vector3 m_offset = Vector3.zero;
 
 	private static MyCameraController m_instance = null;
 	public static MyCameraController Instance { get { return m_instance; } }
@@ -20,6 +20,17 @@ public class MyCameraController : CameraController
 		Application.targetFrameRate = FRAME_RATE_TARGET;
 	}
 
+	private void Start()
+	{
+		m_offset.y = PanelManager.Instance.PanelSize.y * 0.5f;
+		m_offset.z = -10.0f;
+
+		Vector3 targetPosition = m_testObject.transform.position;
+		targetPosition.y = m_offset.y;
+		targetPosition.z = m_offset.z;
+		transform.position = targetPosition;
+	}
+
 	private void OnDestroy()
 	{
 		m_instance = null;
@@ -30,7 +41,9 @@ public class MyCameraController : CameraController
 		if( m_testObject == null ) { return; }
 
 		Vector3 velocity = Vector3.zero;
-		Vector3 targetPosition = m_testObject.transform.position + CAMERA_OFFSET;
+		Vector3 targetPosition = m_testObject.transform.position;
+		targetPosition.y = m_offset.y;
+		targetPosition.z = m_offset.z;
 		transform.position = Vector3.SmoothDamp( transform.position, targetPosition, ref velocity, 0.08f );
 	}
 }

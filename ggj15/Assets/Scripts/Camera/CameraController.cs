@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour
 
 	protected virtual void Reset()
 	{
-		m_orthoSize = 3.84f;
+		m_orthoSize = 3.84f;	//3.84f
 
 		// 4:3
 		m_aspectRatioWidth = 4.0f;
