@@ -48,7 +48,7 @@ public class FocusEffect : ImageEffectBase {
 
 		foreach ( FocusBeacon b in FocusBeacon.S_BEACONS ) {
 
-			float distance = Mathf.Abs( (m_player.transform.position - b.transform.position).magnitude );
+			float distance = Mathf.Abs( m_player.transform.position.x - b.transform.position.x );
 			minDistance = Mathf.Min( minDistance, distance );
 
 			Vector3 position = Camera.main.WorldToScreenPoint( b.transform.position );
