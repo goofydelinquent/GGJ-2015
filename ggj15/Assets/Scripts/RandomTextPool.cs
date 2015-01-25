@@ -26,25 +26,22 @@ public static class RandomTextPool {
 		"I wonder what she's doing.",
 		"How can I find her?",
 		"Where is she?",
-		"It feels like a text from her.",
 		"I can't stop thinking of her.",
 		"How do people last through this?"
 	};
 
 	private static string[] m_midMessages = {
-		"Why do I keep on\ncoming back?",
-		"Enough.",
-		"If only...\nI won't be here anymore.",
+		"Why do I keep \ncoming back?",
+		"Enough...",
 		"Running through my mind.\nWalking in circles.",
 		"Where am I going? ...\nWhat do I do?",
 		"Should I keep my heart in this...?",
-		"I know I could do better.",
+		"I know I can do better.",
 		"There must be an end to this.",
 		"Maybe this time\nit would be different.",
 		"It must be me.",
 		"It's too hard to hold on.",
 		"Are these dreams or memories? Nightmares?",
-		"At least I could try to...",
 		"You lose what you cling to.",
 		"I want to get out of here.",
 		"I thought holding on makes us strong but...",
