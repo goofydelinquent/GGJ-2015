@@ -39,11 +39,11 @@ public class MemoryPanel : Panel
 	}
 
 	public bool HasTrigger () {
-		return m_trigger != null;
+		return (m_trigger != null || m_bDone );
 	}
 
 	public bool HasTriggerActivated() {
-		return m_trigger != null && m_bDone;
+		return m_bDone;
 	}
 
 	protected override void Update() 
