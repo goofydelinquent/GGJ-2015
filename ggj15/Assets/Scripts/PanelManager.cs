@@ -29,6 +29,8 @@ public class PanelManager : MonoBehaviour
 
 	private bool m_bDone = false;
 
+	private bool m_bEndGame = false;
+
 
 	private void Awake()
 	{
@@ -43,13 +45,13 @@ public class PanelManager : MonoBehaviour
 
 		RequestPanel();
 		RequestPanel( false );
-
+		/*
 		RequestPanel();
 		RequestPanel( false );
 		RequestPanel( false );
 		RequestPanel();
 		RequestPanel( false );
-
+*/
 	}
 
 	private void OnDestroy()
@@ -155,6 +157,12 @@ public class PanelManager : MonoBehaviour
 
 		if( m_bDone )
 		{
+			// Disable Control of Player on next entry of filmstrip.
+
+			if( !m_bEndGame ) {
+				PlayerController.Instance.PlayEndCutscene();
+				m_bEndGame = true;
+			}
 			return;
 		}
 

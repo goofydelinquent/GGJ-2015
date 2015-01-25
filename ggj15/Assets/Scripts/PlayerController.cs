@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
 
 	private bool m_bIsWalkForced = false;
 
+	private bool m_bIsEndCutscene = false;
+
 	private void Awake()
 	{
 		m_instance = this;
@@ -25,13 +27,16 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-		if( Input.GetKey( KeyCode.RightArrow ) ) 
+		if( !m_bIsEndCutscene )
 		{
-			bRight = true;
-		}
-		else
-		{
-			bRight = false;
+			if( Input.GetKey( KeyCode.RightArrow ) ) 
+			{
+				bRight = true;
+			}
+			else
+			{
+				bRight = false;
+			}
 		}
 
 		if ( m_bIsWalkForced ) {
@@ -39,6 +44,20 @@ public class PlayerController : MonoBehaviour
 		}
 
 		m_animator.SetBool( "bWalk", bRight );
+	}
+
+	public void PlayEndCutscene()
+	{
+		m_bIsEndCutscene = true;
+		bRight = false;
+		ForceSetWalking( true );
+		Invoke( "EndCutsceneCallback", 2 );
+	}
+
+	private void EndCutsceneCallback()
+	{
+		ForceSetWalking( false );
+		m_animator.SetBool( "bTurn", true );
 	}
 
 	public void ForceSetWalking( bool p_bIsWalking ) {
