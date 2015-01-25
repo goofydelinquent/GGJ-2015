@@ -58,7 +58,7 @@ public class PanelManager : MonoBehaviour
 	}
 
 	public void AddSequence() {
-		int sequenceType = Random.Range( 0, 2 );
+		int sequenceType = Random.Range( 0, 4 );
 		switch( sequenceType ) {
 			case 0: {
 				RequestPanel( true );
@@ -72,10 +72,20 @@ public class PanelManager : MonoBehaviour
 				RequestPanel( false );
 				break;
 			}
-				case 2: {
+			case 2: {
 				RequestPanel( false );
 				RequestPanel( false );
 				RequestPanel( true );
+				break;
+			}
+			case 3: {
+				RequestPanel( false );
+				RequestPanel( true );
+				break;
+			}
+			case 4: {
+				RequestPanel( true );
+				RequestPanel( false );
 				break;
 			}
 		}
