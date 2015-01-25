@@ -11,6 +11,9 @@ public class BgmManager : MonoBehaviour {
 		Ending = 2
 	}
 
+	private static BgmManager m_instance;
+	public static BgmManager Instance { get { return m_instance; } }
+
 	private int m_bufferCount = 2;
 
 	public List<AudioClip> m_clips = new List<AudioClip>();
@@ -25,11 +28,13 @@ public class BgmManager : MonoBehaviour {
 	private int m_nextClipIndex = -1;
 	private float m_timeToNext = -1f;
 
-	private float m_fadeTime = 2f;
+	private float m_fadeTime = 0.5f;
 	private bool m_bIsFading = false;
 	
 	void Awake () {
-		
+
+		m_instance = this;
+
 		for( int i = 0; i < m_bufferCount; i++ ) {
 			
 			GameObject current = new GameObject( "Buffer " + i );
@@ -63,6 +68,11 @@ public class BgmManager : MonoBehaviour {
 		
 	}
 	
+	private void OnDestroy()
+	{
+		m_instance = null;
+	}
+
 	// Use this for initialization
 	void Start () {
 		

@@ -10,6 +10,10 @@ public class MyCameraController : CameraController
 	private static MyCameraController m_instance = null;
 	public static MyCameraController Instance { get { return m_instance; } }
 
+	private bool m_bFocusToEndPanel = false;
+
+	private float m_dampValue = 0.08f;
+
 	protected override void Awake()
 	{
 		base.Awake();
@@ -21,14 +25,13 @@ public class MyCameraController : CameraController
 
 	private void Start()
 	{
-		m_offset.x = 2;
+		m_offset.x = 1;
 		m_offset.y = PanelManager.Instance.PanelSize.y * 0.5f;
 		m_offset.z = -10.0f;
 
 		if ( ! m_bIsFollowingPlayer ) { return; }
 
-		Vector3 targetPosition = PlayerController.Instance.transform.position;
-		targetPosition.x += m_offset.x;
+		Vector3 targetPosition = GetTargetPosition();
 		targetPosition.y = m_offset.y;
 		targetPosition.z = m_offset.z;
 		transform.position = targetPosition;
@@ -48,10 +51,26 @@ public class MyCameraController : CameraController
 		if ( ! m_bIsFollowingPlayer ) { return; }
 
 		Vector3 velocity = Vector3.zero;
-		Vector3 targetPosition = PlayerController.Instance.transform.position;
-		targetPosition.x += m_offset.x;
+		Vector3 targetPosition = GetTargetPosition();
 		targetPosition.y = m_offset.y;
 		targetPosition.z = m_offset.z;
-		transform.position = Vector3.SmoothDamp( transform.position, targetPosition, ref velocity, 0.08f );
+		transform.position = Vector3.SmoothDamp( transform.position, targetPosition, ref velocity, m_dampValue );
+	}
+
+	public Vector3 GetTargetPosition()
+	{
+		if( m_bFocusToEndPanel ) {
+			return PanelManager.Instance.EndPanelObject.transform.position + Vector3.right * PanelManager.Instance.PanelSize.x * 0.5f;
+		}
+		else {
+			return PlayerController.Instance.transform.position + Vector3.right * m_offset.x;
+		}
+	}
+
+	public void	FocusToEndPanel()
+	{
+		m_bFocusToEndPanel = true;
+
+		m_dampValue = 0.15f;
 	}
 }
