@@ -62,6 +62,13 @@ public class PanelManager : MonoBehaviour
 	}
 
 	public void AddSequence() {
+
+		if( m_list.Count + 2 > 11 ){
+			return;
+		}
+		 
+
+
 		int sequenceType = Random.Range( 0, 3 );
 		switch( sequenceType ) {
 			case 0: {
@@ -87,10 +94,6 @@ public class PanelManager : MonoBehaviour
 
 	public void RequestPanel( bool p_bWithTrigger = true )
 	{
-		if( m_list.Count > 11 ){
-			return;
-		}
-
 		// Instantiate specific panel here.
 		GameObject[] panels = p_bWithTrigger ? m_triggerPanels : m_fillerPanels;
 		GameObject panelObject = Instantiate( panels[Random.Range( 0, panels.Length )] ) as GameObject;
@@ -130,10 +133,6 @@ public class PanelManager : MonoBehaviour
 
 	public void RequestRequiredPanel()
 	{
-		if( m_list.Count > 11 ){
-			return;
-		}
-		
 		// Instantiate specific panel here.
 		GameObject panelObject = Instantiate( m_requiredPanel ) as GameObject;
 		panelObject.transform.parent = transform;
