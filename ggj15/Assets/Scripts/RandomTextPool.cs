@@ -14,17 +14,21 @@ public static class RandomTextPool {
 	private static int m_missedCount = 0;
 
 	private static string[] m_earlyMessages = {
-		"She was.",
+		"She was...",
 		"I thought\nit would be easy.",
-		"I wish she was still one.",
+		"I wish she was still the one.",
 		"She would've made\nthis day brighter.",
-		"We could've picked up\nthe broken pieces together.",
+		"We could've picked up\nthe pieces together.",
 		"Follow your heart.",
-		"No more tears.",
+		"Please. No more tears.",
 		"It can't be her.\nIt never is.",
-		"I used to cherish\neverything.",
+		"I cherished everything.",
+		"I wonder what she's doing.",
 		"How can I find her?",
-		"But where is she?"
+		"Where is she?",
+		"It feels like a text from her.",
+		"I can't stop thinking of her.",
+		"How do people last through this?"
 	};
 
 	private static string[] m_midMessages = {
@@ -32,43 +36,51 @@ public static class RandomTextPool {
 		"Enough.",
 		"If only...\nI won't be here anymore.",
 		"Running through my mind.\nWalking in circles.",
-		"Where am I going?",
-		"I could keep my heart\nin this or...",
+		"Where am I going? ...\nWhat do I do?",
+		"Should I keep my heart in this...?",
 		"I know I could do better.",
 		"There must be an end to this.",
 		"Maybe this time\nit would be different.",
 		"It must be me.",
 		"It's too hard to hold on.",
-		"Are these memories\nor nightmares?",
-		"I need to at least try.",
-		"You can only lose\nwhat you cling to.",
-		"I can accept change.",
-		"Some think holding on\nmakes us strong."
+		"Are these dreams or memories? Nightmares?",
+		"At least I could try to...",
+		"You lose what you cling to.",
+		"I want to get out of here.",
+		"I thought holding on makes us strong but...",
+		"I wonder what she's doing,\nbut I don't want to know."
 	};
 
 	private static string[] m_lateMessages = {
-		"Elsa said...",
+		"Elsa kept telling me...",
 		"Should I stay\nor should I go?",
-		"It really must've\nbeen me.",
-		"Do I really need\nto recall?",
+		"I'm just getting worse.",
+		"Do I really need\nto do this to myself?",
 		"I don't need\nto keep hurting myself.",
-		"Just imagine\ntime running out.",
+		"I feel like I'm going nowhere.",
 		"Too much thinking.",
 		"Why do I even bother?",
-		"Sometimes the hardest part\nis learning to start over."
+		"The hardest part is learning to start over.",
+		"I don't want to keep doing this to myself.",
+		"I need to get away."
 	};
 
 	private static string[] m_goodMessages = {
 		"Finally...",
-		"That was new.",
+		"That was... new.",
 		"I think this is right.",
 		"This is what I need.",
-		"This could be the end of everything."
+		"I... feel better.",
+		"That was... a surprising feeling."
 	};
 
 	private static string[] m_bestMessages = {
 		"Almost there.",
-		"There's no looking back now."
+		"There's no looking back now.",
+		"Just keep going.",
+		"This could be it.",
+		"Pain dulls with time.",
+		"Keep thinking: new memories."
 	};
 
 	public static void Reset () {

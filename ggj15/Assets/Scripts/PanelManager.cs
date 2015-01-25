@@ -43,17 +43,13 @@ public class PanelManager : MonoBehaviour
 		m_list = new LinkedList<Panel>();
 
 		RequestPanel( false );
-		RequestPanel( false );
 		RequestRequiredPanel();
 		RequestPanel( false );
 		RequestPanel();
 		RequestPanel( false );
-
 		RequestPanel();
 		RequestPanel( false );
-
 		RequestPanel();
-		RequestPanel( false );
 		RequestPanel( false );
 		RequestPanel();
 		RequestPanel( false );
@@ -91,7 +87,7 @@ public class PanelManager : MonoBehaviour
 
 	public void RequestPanel( bool p_bWithTrigger = true )
 	{
-		if( m_list.Count > 15 ){
+		if( m_list.Count > 11 ){
 			return;
 		}
 
@@ -108,7 +104,7 @@ public class PanelManager : MonoBehaviour
 		Panel panel = panelObject.GetComponent<Panel>();
 		panel.Index = m_totalPanelCounter;
 
-		if( !p_bWithTrigger ) {
+		if( !p_bWithTrigger && m_totalPanelCounter > 2 && Random.Range( 0, 3 ) == 0 ) {
 			GameObject quoteObject = Instantiate( Resources.Load( "Prefabs/Quote" ) ) as GameObject;
 			quoteObject.transform.parent = panelObject.transform;
 			quoteObject.transform.position = new Vector3( m_panelSize.x * ( m_totalPanelCounter + 0.5f ), m_panelSize.y * 0.75f, 0 );
@@ -134,7 +130,7 @@ public class PanelManager : MonoBehaviour
 
 	public void RequestRequiredPanel()
 	{
-		if( m_list.Count > 15 ){
+		if( m_list.Count > 11 ){
 			return;
 		}
 		
@@ -201,7 +197,7 @@ public class PanelManager : MonoBehaviour
 		}
 
 		//PASTA CODE!
-		if ( m_node.Previous != null && m_node.Previous.Value != null) {
+		if ( m_node != null && m_node.Previous != null && m_node.Previous.Value != null) {
 			MemoryPanel mPanel = m_node.Previous.Value as MemoryPanel;
 			if ( mPanel != null ) {
 				if ( mPanel.HasTrigger() ){
