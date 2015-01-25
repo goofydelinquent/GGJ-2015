@@ -36,13 +36,13 @@ public class MemoryController : MonoBehaviour
 #if DEBUG_PAT
 		Invoke( "DelayedFadeOut", 0.65f );
 #else
-		Invoke( "DelayedFadeOut", 4.65f );
+		Invoke( "DelayedFadeOut", 0.35f );
 #endif
 	}
 
 	private void DelayedFadeOut()
 	{
-		iTween.FadeTo( gameObject, iTween.Hash( "alpha", 0, "time", 0.35f, "easeType", iTween.EaseType.easeOutCubic ) );
+		iTween.FadeTo( gameObject, iTween.Hash( "alpha", 0, "time", 5.0f, "easeType", iTween.EaseType.easeInOutQuad ) );
 		//iTween.FadeTo( gameObject, 0, 0.35f );
 	}
 }
