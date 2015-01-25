@@ -63,12 +63,6 @@ public class PanelManager : MonoBehaviour
 
 	public void AddSequence() {
 
-		if( m_list.Count + 2 > 11 ){
-			return;
-		}
-		 
-
-
 		int sequenceType = Random.Range( 0, 3 );
 		switch( sequenceType ) {
 			case 0: {
@@ -94,6 +88,15 @@ public class PanelManager : MonoBehaviour
 
 	public void RequestPanel( bool p_bWithTrigger = true )
 	{
+		if( m_list.Count > 11 ){
+
+			if( p_bWithTrigger ) {
+				return;
+			}
+
+		}
+
+
 		// Instantiate specific panel here.
 		GameObject[] panels = p_bWithTrigger ? m_triggerPanels : m_fillerPanels;
 		GameObject panelObject = Instantiate( panels[Random.Range( 0, panels.Length )] ) as GameObject;
@@ -201,14 +204,6 @@ public class PanelManager : MonoBehaviour
 			m_node = m_node.Next;
 		}
 
-		MemoryPanel memoryPanel = m_node.Value as MemoryPanel;
-		if( memoryPanel != null )
-		{
-			if( memoryPanel.Quote != null ) {
-				memoryPanel.Quote.RandomizeText();
-			}
-		}
-
 		//PASTA CODE!
 		if ( m_node != null && m_node.Previous != null && m_node.Previous.Value != null) {
 			MemoryPanel mPanel = m_node.Previous.Value as MemoryPanel;
@@ -220,6 +215,14 @@ public class PanelManager : MonoBehaviour
 						RandomTextPool.AddMissedTrigger();
 					}
 				}
+			}
+		}
+
+		MemoryPanel memoryPanel = m_node.Value as MemoryPanel;
+		if( memoryPanel != null )
+		{
+			if( memoryPanel.Quote != null ) {
+				memoryPanel.Quote.RandomizeText();
 			}
 		}
 
