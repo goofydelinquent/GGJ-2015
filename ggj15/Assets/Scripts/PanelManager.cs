@@ -201,7 +201,7 @@ public class PanelManager : MonoBehaviour
 		}
 
 		//PASTA CODE!
-		if ( m_node.Previous != null && m_node.Previous.Value != null) {
+		if ( m_node != null && m_node.Previous != null && m_node.Previous.Value != null) {
 			MemoryPanel mPanel = m_node.Previous.Value as MemoryPanel;
 			if ( mPanel != null ) {
 				if ( mPanel.HasTrigger() ){
