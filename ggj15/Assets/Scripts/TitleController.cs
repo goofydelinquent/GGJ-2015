@@ -13,6 +13,8 @@ public class TitleController : MonoBehaviour {
 	public GameObject m_title;
 	public GameObject m_cover;
 
+	public ParticleSystem m_particle;
+
 	private float m_curScrollTimeLeft = -1f;
 	private float m_timeToScrollBg = 3f;
 
@@ -48,6 +50,7 @@ public class TitleController : MonoBehaviour {
 				m_bgmManager.SetNextTrack( BgmManager.MusicType.Body, true );
 				m_curScrollTimeLeft = m_timeToScrollBg;
 				m_panelManager.enabled = true;
+				m_particle.Stop();
 
 				return;
 			}
