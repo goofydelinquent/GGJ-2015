@@ -67,6 +67,7 @@ public class MemoryPanel : Panel
 				PanelManager.Instance.AddSequence();
 
 				Debug.Log( "KEY DOWN" );
+				ChimePlayer.Instance.PlaySound();
 
 				m_text.gameObject.SetActive( false );
 
