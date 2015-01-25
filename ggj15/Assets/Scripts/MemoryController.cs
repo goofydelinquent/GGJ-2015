@@ -17,6 +17,8 @@ public class MemoryController : MonoBehaviour
 
 		gameObject.SetActive( false );
 
+		RandomTextPool.Reset();
+
 		iTween.Init( gameObject );
 	}
 
