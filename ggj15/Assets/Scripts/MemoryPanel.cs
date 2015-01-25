@@ -38,6 +38,14 @@ public class MemoryPanel : Panel
 		m_text.text = m_key;
 	}
 
+	public bool HasTrigger () {
+		return m_trigger != null;
+	}
+
+	public bool HasTriggerActivated() {
+		return m_trigger != null && m_bDone;
+	}
+
 	protected override void Update() 
 	{
 		if( m_trigger == null ) { return; }
@@ -59,6 +67,7 @@ public class MemoryPanel : Panel
 				PanelManager.Instance.AddSequence();
 
 				Debug.Log( "KEY DOWN" );
+				ChimePlayer.Instance.PlaySound();
 
 				m_text.gameObject.SetActive( false );
 
