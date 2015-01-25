@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 	private Animator m_animator;
 
 	private bool m_bIsWalkForced = false;
+	private bool m_bIsFacingRight = true;
 
 	private void Awake()
 	{
@@ -22,23 +23,29 @@ public class PlayerController : MonoBehaviour
 	}
 
 	bool bRight = false;
+	bool bLeft = false;
+	bool bIsMoving = false;
 
 	void Update()
 	{
-		if( Input.GetKey( KeyCode.RightArrow ) ) 
-		{
-			bRight = true;
-		}
-		else
-		{
-			bRight = false;
-		}
+		bRight = Input.GetKey( KeyCode.RightArrow );
+		bLeft = Input.GetKey( KeyCode.LeftArrow );
+
+		bIsMoving = bRight || bLeft;
 
 		if ( m_bIsWalkForced ) {
+			bIsMoving = true;
 			bRight = true;
 		}
 
-		m_animator.SetBool( "bWalk", bRight );
+		m_animator.SetBool( "bWalk", bIsMoving );
+
+		if ( bIsMoving && ( (bLeft && m_bIsFacingRight) || (!bLeft && !m_bIsFacingRight ) ) ) {
+			Vector3 scale = this.transform.localScale;
+			scale.x *= -1;
+			this.transform.localScale = scale;
+			m_bIsFacingRight = !m_bIsFacingRight;
+		}
 	}
 
 	public void ForceSetWalking( bool p_bIsWalking ) {
@@ -56,14 +63,23 @@ public class PlayerController : MonoBehaviour
 			return;
 		}
 
+		#if DEBUG_PAT
+		float distance = 5f * Time.fixedDeltaTime * ( bRight ? 1 : -1 );
+		#else
+		float distance = 2f * Time.fixedDeltaTime * ( bRight ? 1 : -1 );
+		#endif
 
-		if( bRight ) 
+		if ( bLeft ) {
+			int index = PanelManager.Instance.CurrentPanelIndex;
+			float minX = (PanelManager.Instance.PanelSize.x * index );
+			if ( transform.position.x + distance < minX ) {
+				bIsMoving = false;
+			}
+		}
+
+		if( bIsMoving ) 
 		{
-#if DEBUG_PAT
-			transform.Translate( Vector3.right * 5f * Time.deltaTime );//2
-#else
-			transform.Translate( Vector3.right * 2f * Time.deltaTime );
-#endif
+			transform.Translate( Vector3.right * distance );
 		}
 	}
 
