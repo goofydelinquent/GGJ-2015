@@ -10,6 +10,7 @@ public class PanelManager : MonoBehaviour
 
 	[SerializeField] private GameObject[] m_triggerPanels = null;
 	[SerializeField] private GameObject[] m_fillerPanels = null;
+	[SerializeField] private GameObject m_requiredPanel = null;
 
 	private LinkedList<Panel> m_list = null;
 	private LinkedListNode<Panel> m_node = null;
@@ -40,6 +41,8 @@ public class PanelManager : MonoBehaviour
 
 		RequestPanel( false );
 		RequestPanel( false );
+		RequestRequiredPanel();
+		RequestPanel( false );
 		RequestPanel();
 		RequestPanel( false );
 
@@ -60,7 +63,7 @@ public class PanelManager : MonoBehaviour
 	}
 
 	public void AddSequence() {
-		int sequenceType = Random.Range( 0, 4 );
+		int sequenceType = Random.Range( 0, 5 );
 		switch( sequenceType ) {
 			case 0: {
 				RequestPanel( true );
@@ -85,7 +88,7 @@ public class PanelManager : MonoBehaviour
 				RequestPanel( true );
 				break;
 			}
-			case 4: {
+			case 4: default: {
 				RequestPanel( true );
 				RequestPanel( false );
 				break;
@@ -131,6 +134,40 @@ public class PanelManager : MonoBehaviour
 		}
 	}
 
+	public void RequestRequiredPanel()
+	{
+		if( m_list.Count > 15 ){
+			return;
+		}
+		
+		// Instantiate specific panel here.
+		GameObject panelObject = Instantiate( m_requiredPanel ) as GameObject;
+		panelObject.transform.parent = transform;
+		panelObject.transform.position = new Vector3( m_panelSize.x * m_totalPanelCounter, 0, 0 );
+		
+		GameObject stripObject = Instantiate( Resources.Load( "Prefabs/Filmstrip" ) ) as GameObject;
+		stripObject.transform.parent = panelObject.transform;
+		stripObject.transform.position = new Vector3( m_panelSize.x * ( m_totalPanelCounter + 1 ), m_panelSize.y * 0.5f, 0 );
+		
+		Panel panel = panelObject.GetComponent<Panel>();
+		panel.Index = m_totalPanelCounter;
+		
+		m_list.AddLast( panel );
+		
+		m_totalPanelCounter++;
+		
+		//Debug.Log( "List count: " + m_list.Count + " Panel Counter: " + m_totalPanelCounter );
+		
+		if( m_bTryToEnd )
+		{
+			m_bTryToEnd = false;
+			
+			m_bDone = false;
+			
+			Debug.Log( "CANCEL END" );
+		}
+	}
+	
 	GameObject endPanelObject;
 
 	private void AddEndingPanel()
@@ -149,8 +186,8 @@ public class PanelManager : MonoBehaviour
 		}
 	}
 
-	private int endCounter = 1;
-
+	private int endCounter = 1;	
+	
 	public void IncrementCurrentIndex()
 	{
 		m_currentPanelIndex++;
