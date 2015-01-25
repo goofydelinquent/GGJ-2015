@@ -36,6 +36,8 @@ public class PanelManager : MonoBehaviour
 	GameObject m_endPanelObject = null;
 	public GameObject EndPanelObject { get { return m_endPanelObject; } }
 
+	private int m_lastFillers = 0;
+
 	private void Awake()
 	{
 		m_instance = this;
@@ -94,6 +96,15 @@ public class PanelManager : MonoBehaviour
 				return;
 			}
 
+		}
+
+		if ( !p_bWithTrigger ) {
+			m_lastFillers ++;
+			if ( m_lastFillers >= 2 ) {
+				return;
+			}
+		} else {
+			m_lastFillers = 0;
 		}
 
 
@@ -218,11 +229,15 @@ public class PanelManager : MonoBehaviour
 			}
 		}
 
-		MemoryPanel memoryPanel = m_node.Value as MemoryPanel;
-		if( memoryPanel != null )
-		{
-			if( memoryPanel.Quote != null ) {
-				memoryPanel.Quote.RandomizeText();
+		if( m_node != null){
+			if( m_node.Value != null){
+				MemoryPanel memoryPanel = m_node.Value as MemoryPanel;
+				if( memoryPanel != null )
+				{
+					if( memoryPanel.Quote != null ) {
+						memoryPanel.Quote.RandomizeText();
+					}
+				}
 			}
 		}
 

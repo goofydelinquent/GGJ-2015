@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
 		#if DEBUG_PAT
 		float distance = 5f * Time.fixedDeltaTime * ( bRight ? 1 : -1 );
 		#else
-		float distance = 2f * Time.fixedDeltaTime * ( bRight ? 1 : -1 );
+		float distance = 5f * Time.fixedDeltaTime * ( bRight ? 1 : -1 );
 		#endif
 
 		if ( bLeft ) {
