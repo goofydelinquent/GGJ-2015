@@ -85,7 +85,7 @@ public class MemoryPanel : Panel
 #if DEBUG_PAT
 				Invoke( "PlayerDelayControllable", 1.0f );
 #else
-				Invoke( "PlayerDelayControllable", 5.0f );
+				Invoke( "PlayerDelayControllable", 0.35f );
 #endif
 			}
 		}
