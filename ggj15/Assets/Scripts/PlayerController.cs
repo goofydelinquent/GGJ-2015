@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 		m_instance = this;
 
 		m_animator = GetComponent<Animator>();
+		Screen.showCursor = false;
 	}
 
 	bool bRight = false;
