@@ -74,7 +74,9 @@ public class FocusEffect : ImageEffectBase {
 			float size = b.m_radius * scaleFactor;
 
 			float yPosition = position.y;
-			if ( ! ( Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer ) ) {
+			if ( ! ( Application.platform == RuntimePlatform.WindowsEditor 
+			        || Application.platform == RuntimePlatform.WindowsPlayer 
+			        || Application.platform == RuntimePlatform.WindowsWebPlayer ) ) {
 				yPosition = m_screenHeight - yPosition;
 			} else {
 				yPosition = position.y;
