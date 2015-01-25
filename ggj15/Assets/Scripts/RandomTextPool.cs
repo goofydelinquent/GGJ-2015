@@ -86,7 +86,6 @@ public static class RandomTextPool {
 	public static void AddMissedTrigger()
 	{
 		m_missedCount++;
-		m_bIsNewlyMissed = true;
 	}
 
 	public static void AddTriggeredMemory()

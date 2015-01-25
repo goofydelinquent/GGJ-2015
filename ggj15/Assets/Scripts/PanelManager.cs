@@ -205,7 +205,7 @@ public class PanelManager : MonoBehaviour
 			MemoryPanel mPanel = m_node.Previous.Value as MemoryPanel;
 			if ( mPanel != null ) {
 				if ( mPanel.HasTrigger() ){
-					if ( mPanel.HasTriggerActivated() {
+					if ( mPanel.HasTriggerActivated() ) {
 						RandomTextPool.AddTriggeredMemory();
 					} else {
 						RandomTextPool.AddMissedTrigger();
