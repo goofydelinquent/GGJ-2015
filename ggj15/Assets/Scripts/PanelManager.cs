@@ -11,6 +11,7 @@ public class PanelManager : MonoBehaviour
 	[SerializeField] private GameObject[] m_triggerPanels = null;
 	[SerializeField] private GameObject[] m_fillerPanels = null;
 	[SerializeField] private GameObject m_requiredPanel = null;
+	[SerializeField] private GameObject m_endPanel = null;
 
 	private LinkedList<Panel> m_list = null;
 	private LinkedListNode<Panel> m_node = null;
@@ -32,6 +33,8 @@ public class PanelManager : MonoBehaviour
 
 	private bool m_bEndGame = false;
 
+	GameObject m_endPanelObject = null;
+	public GameObject EndPanelObject { get { return m_endPanelObject; } }
 
 	private void Awake()
 	{
@@ -45,10 +48,10 @@ public class PanelManager : MonoBehaviour
 		RequestPanel( false );
 		RequestPanel();
 		RequestPanel( false );
-
+		/*
 		RequestPanel();
 		RequestPanel( false );
-		/*
+
 		RequestPanel();
 		RequestPanel( false );
 		RequestPanel( false );
@@ -63,7 +66,7 @@ public class PanelManager : MonoBehaviour
 	}
 
 	public void AddSequence() {
-		int sequenceType = Random.Range( 0, 5 );
+		int sequenceType = Random.Range( 0, 3 );
 		switch( sequenceType ) {
 			case 0: {
 				RequestPanel( true );
@@ -77,18 +80,7 @@ public class PanelManager : MonoBehaviour
 				RequestPanel( false );
 				break;
 			}
-			case 2: {
-				RequestPanel( false );
-				RequestPanel( false );
-				RequestPanel( true );
-				break;
-			}
-			case 3: {
-				RequestPanel( false );
-				RequestPanel( true );
-				break;
-			}
-			case 4: default: {
+			case 2: default: {
 				RequestPanel( true );
 				RequestPanel( false );
 				break;
@@ -158,31 +150,31 @@ public class PanelManager : MonoBehaviour
 		
 		//Debug.Log( "List count: " + m_list.Count + " Panel Counter: " + m_totalPanelCounter );
 		
+		
 		if( m_bTryToEnd )
 		{
 			m_bTryToEnd = false;
 			
-			m_bDone = false;
+			m_bHasEnding = false;
+			
+			DestroyEndingPanel();
 			
 			Debug.Log( "CANCEL END" );
 		}
 	}
-	
-	GameObject endPanelObject;
 
 	private void AddEndingPanel()
 	{
-		endPanelObject = Instantiate( m_fillerPanels[Random.Range( 0, m_fillerPanels.Length )] ) as GameObject;
-		endPanelObject.transform.parent = transform;
-		endPanelObject.transform.position = new Vector3( m_panelSize.x * m_totalPanelCounter, 0, 0 );
-		endPanelObject.transform.localScale *= 1.2f;
+		m_endPanelObject = Instantiate( m_endPanel ) as GameObject;
+		m_endPanelObject.transform.parent = transform;
+		m_endPanelObject.transform.position = new Vector3( m_panelSize.x * m_totalPanelCounter, 0, 0 );
 	}
 
 	private void DestroyEndingPanel()
 	{
-		if( endPanelObject != null )
+		if( m_endPanelObject != null )
 		{
-			Destroy( endPanelObject );
+			Destroy( m_endPanelObject );
 		}
 	}
 
@@ -220,6 +212,9 @@ public class PanelManager : MonoBehaviour
 
 			if( endCounter == 0 ){
 				if( !m_bEndGame ) {
+
+					BgmManager.Instance.SetNextTrack( BgmManager.MusicType.Ending, true, true );
+
 					PlayerController.Instance.PlayEndCutscene();
 					m_bEndGame = true;
 				}
@@ -235,6 +230,7 @@ public class PanelManager : MonoBehaviour
 			if( CheckForNode( m_node, 1 ) ) {
 				m_bHasEnding = true;
 				AddEndingPanel();
+
 				Debug.Log( "DONE" );
 
 			}

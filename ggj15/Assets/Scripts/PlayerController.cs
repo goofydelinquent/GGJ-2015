@@ -61,12 +61,14 @@ public class PlayerController : MonoBehaviour
 
 	public void PlayEndCutscene()
 	{
+		MyCameraController.Instance.FocusToEndPanel();
+
 		m_bIsEndCutscene = true;
 		bRight = false;
 		bLeft = false;
 		bIsMoving = false;
 		ForceSetWalking( true );
-		Invoke( "EndCutsceneCallback", 2 );
+		Invoke( "EndCutsceneCallback", 3.2f );
 	}
 
 	private void EndCutsceneCallback()
@@ -76,6 +78,14 @@ public class PlayerController : MonoBehaviour
 		bLeft = false;
 		bIsMoving = false;
 		m_animator.SetBool( "bTurn", true );
+
+		Invoke( "CreditsCallback", 5.0f );
+	}
+
+	private void CreditsCallback()
+	{
+		gameObject.SetActive( false );
+		PanelManager.Instance.gameObject.SetActive( false );
 	}
 
 	public void ForceSetWalking( bool p_bIsWalking ) {
