@@ -16,6 +16,9 @@ public class MemoryPanel : Panel
 
 	private bool m_bCheckForInput = false;
 
+	Quote m_quote = null;
+	public Quote Quote { get { return m_quote; } set{ m_quote = value; } }
+
 	protected override void Start() 
 	{
 		if( m_trigger == null ) { return; }

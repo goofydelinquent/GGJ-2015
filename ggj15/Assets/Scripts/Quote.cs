@@ -3,9 +3,24 @@ using System.Collections;
 
 public class Quote : MonoBehaviour
 {	
-	void Start()
+	private TextMesh m_text;
+
+	public void Awake()
 	{
-		GetComponent<TextMesh>().text = RandomTextPool.GetRandomText();;
-		RandomTextPool.GetRandomText();
+		m_text = GetComponent<TextMesh>();
+
+		m_text.text = "";
+
+		iTween.Init( gameObject );
 	}
+
+	public void RandomizeText()
+	{
+		m_text.text = RandomTextPool.GetRandomText();
+
+		//iTween.FadeTo( gameObject, 0, 0 );
+		//iTween.FadeTo( gameObject, iTween.Hash( "alpha", 1, "time", 0.35f, "easeType", iTween.EaseType.easeInOutQuad ) );
+	}
+
+
 }

@@ -104,10 +104,16 @@ public class PanelManager : MonoBehaviour
 		Panel panel = panelObject.GetComponent<Panel>();
 		panel.Index = m_totalPanelCounter;
 
-		if( !p_bWithTrigger && m_totalPanelCounter > 2 && Random.Range( 0, 3 ) > 0 ) {
+		if( !p_bWithTrigger && m_totalPanelCounter > 2 ) {
 			GameObject quoteObject = Instantiate( Resources.Load( "Prefabs/Quote" ) ) as GameObject;
 			quoteObject.transform.parent = panelObject.transform;
 			quoteObject.transform.position = new Vector3( m_panelSize.x * ( m_totalPanelCounter + 0.5f ), m_panelSize.y * 0.8f, 0 );
+
+			MemoryPanel memoryPanel = panel as MemoryPanel;
+			if( memoryPanel != null )
+			{
+				memoryPanel.Quote = quoteObject.GetComponent<Quote>();
+			}
 		}
 
 		m_list.AddLast( panel );
@@ -194,6 +200,14 @@ public class PanelManager : MonoBehaviour
 		}
 		else {
 			m_node = m_node.Next;
+		}
+
+		MemoryPanel memoryPanel = m_node.Value as MemoryPanel;
+		if( memoryPanel != null )
+		{
+			if( memoryPanel.Quote != null ) {
+				memoryPanel.Quote.RandomizeText();
+			}
 		}
 
 		//PASTA CODE!
