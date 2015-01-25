@@ -200,6 +200,20 @@ public class PanelManager : MonoBehaviour
 			m_node = m_node.Next;
 		}
 
+		//PASTA CODE!
+		if ( m_node.Previous != null && m_node.Previous.Value != null) {
+			MemoryPanel mPanel = m_node.Previous.Value as MemoryPanel;
+			if ( mPanel != null ) {
+				if ( mPanel.HasTrigger() ){
+					if ( mPanel.HasTriggerActivated() {
+						RandomTextPool.AddTriggeredMemory();
+					} else {
+						RandomTextPool.AddMissedTrigger();
+					}
+				}
+			}
+		}
+
 		if( m_currentPanelIndex > 1 )
 		{
 			LinkedListNode<Panel> node = m_list.First;

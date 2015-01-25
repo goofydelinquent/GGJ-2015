@@ -9,7 +9,10 @@ public static class RandomTextPool {
 	private static Queue<int> m_lateQueue = new Queue<int>();
 	private static Queue<int> m_goodQueue = new Queue<int>();
 	private static Queue<int> m_bestQueue = new Queue<int>();
-		
+
+	private static int m_triggeredCount = 0;
+	private static int m_missedCount = 0;
+
 	private static string[] m_earlyMessages = {
 		"She was.",
 		"I thought\nit would be easy.",
@@ -75,6 +78,21 @@ public static class RandomTextPool {
 
 		m_goodQueue.Clear();
 		m_bestQueue.Clear();
+
+		m_triggeredCount = 0;
+		m_missedCount = 0;
+	}
+
+	public static void AddMissedTrigger()
+	{
+		m_missedCount++;
+		m_bIsNewlyMissed = true;
+	}
+
+	public static void AddTriggeredMemory()
+	{
+		m_triggeredCount++;
+		m_missedCount = 0;
 	}
 
 	public static string GetRandomText() {
@@ -84,7 +102,13 @@ public static class RandomTextPool {
 		string[] list = null;
 		Queue<int> queue = null;
 
-		if ( panelIndex < 10 ) {
+		if ( m_missedCount > 4 ) {
+			list = m_bestMessages;
+			queue = m_bestQueue;
+		} else if ( m_missedCount > 0 ) {
+			list = m_goodMessages;
+			queue = m_goodQueue;
+		} else if ( panelIndex < 10 ) {
 			list = m_earlyMessages;
 			queue = m_earlyQueue;
 		} else if ( panelIndex < 25 ) {
@@ -94,6 +118,7 @@ public static class RandomTextPool {
 			list = m_lateMessages;
 			queue = m_lateQueue;
 		}
+
 
 		while ( true ) {
 
