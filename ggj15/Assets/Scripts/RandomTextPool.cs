@@ -111,18 +111,23 @@ public static class RandomTextPool {
 		Queue<int> queue = null;
 
 		if ( m_missedCount > 4 ) {
+			Debug.Log( "BEST" );
 			list = m_bestMessages;
 			queue = m_bestQueue;
 		} else if ( m_missedCount > 0 ) {
+			Debug.Log( "GOOD" );
 			list = m_goodMessages;
 			queue = m_goodQueue;
 		} else if ( panelIndex < 10 ) {
+			Debug.Log( "EARLY" );
 			list = m_earlyMessages;
 			queue = m_earlyQueue;
 		} else if ( panelIndex < 25 ) {
+			Debug.Log( "MID" );
 			list = m_midMessages;
 			queue = m_midQueue;
 		} else {
+			Debug.Log( "LATE" );
 			list = m_lateMessages;
 			queue = m_lateQueue;
 		}
