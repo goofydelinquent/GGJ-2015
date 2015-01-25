@@ -27,7 +27,7 @@ public class PanelManager : MonoBehaviour
 
 	private bool m_bTryToEnd = false;
 
-	private bool m_bDone = false;
+	private bool m_bHasEnding = false;
 
 	private bool m_bEndGame = false;
 
@@ -123,12 +123,34 @@ public class PanelManager : MonoBehaviour
 		{
 			m_bTryToEnd = false;
 
-			m_bDone = false;
+			m_bHasEnding = false;
+
+			DestroyEndingPanel();
 
 			Debug.Log( "CANCEL END" );
 		}
 	}
-	
+
+	GameObject endPanelObject;
+
+	private void AddEndingPanel()
+	{
+		endPanelObject = Instantiate( m_fillerPanels[Random.Range( 0, m_fillerPanels.Length )] ) as GameObject;
+		endPanelObject.transform.parent = transform;
+		endPanelObject.transform.position = new Vector3( m_panelSize.x * m_totalPanelCounter, 0, 0 );
+		endPanelObject.transform.localScale *= 1.2f;
+	}
+
+	private void DestroyEndingPanel()
+	{
+		if( endPanelObject != null )
+		{
+			Destroy( endPanelObject );
+		}
+	}
+
+	private int endCounter = 1;
+
 	public void IncrementCurrentIndex()
 	{
 		m_currentPanelIndex++;
@@ -155,14 +177,18 @@ public class PanelManager : MonoBehaviour
 
 		//Debug.Log( "Current panel index: " + m_currentPanelIndex );
 
-		if( m_bDone )
+		if( m_bHasEnding )
 		{
 			// Disable Control of Player on next entry of filmstrip.
 
-			if( !m_bEndGame ) {
-				PlayerController.Instance.PlayEndCutscene();
-				m_bEndGame = true;
+			if( endCounter == 0 ){
+				if( !m_bEndGame ) {
+					PlayerController.Instance.PlayEndCutscene();
+					m_bEndGame = true;
+				}
 			}
+			endCounter--;
+
 			return;
 		}
 
@@ -170,8 +196,10 @@ public class PanelManager : MonoBehaviour
 		if( m_bTryToEnd )
 		{
 			if( CheckForNode( m_node, 1 ) ) {
-				m_bDone = true;
+				m_bHasEnding = true;
+				AddEndingPanel();
 				Debug.Log( "DONE" );
+
 			}
 		}
 		else

@@ -29,9 +29,18 @@ public class PlayerController : MonoBehaviour
 	bool bIsMoving = false;
 
 	void Update()
-	{
-		bRight = Input.GetKey( KeyCode.RightArrow );
-		bLeft = Input.GetKey( KeyCode.LeftArrow );
+	{		
+		if( !m_bIsEndCutscene ) {
+
+			bRight = Input.GetKey( KeyCode.RightArrow );
+
+			if( !bRight ) {
+				bLeft = Input.GetKey( KeyCode.LeftArrow );
+			}
+			else {
+				bLeft = false;
+			}
+		}
 
 		bIsMoving = bRight || bLeft;
 
@@ -44,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
 		if ( bIsMoving && ( (bLeft && m_bIsFacingRight) || (!bLeft && !m_bIsFacingRight ) ) ) {
 			Vector3 scale = this.transform.localScale;
-			scale.x *= -1;
+			scale.x = bRight ? 1 : -1;
 			this.transform.localScale = scale;
 			m_bIsFacingRight = !m_bIsFacingRight;
 		}
@@ -54,6 +63,8 @@ public class PlayerController : MonoBehaviour
 	{
 		m_bIsEndCutscene = true;
 		bRight = false;
+		bLeft = false;
+		bIsMoving = false;
 		ForceSetWalking( true );
 		Invoke( "EndCutsceneCallback", 2 );
 	}
@@ -61,6 +72,9 @@ public class PlayerController : MonoBehaviour
 	private void EndCutsceneCallback()
 	{
 		ForceSetWalking( false );
+		bRight = false;
+		bLeft = false;
+		bIsMoving = false;
 		m_animator.SetBool( "bTurn", true );
 	}
 
