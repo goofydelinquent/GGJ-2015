@@ -25,6 +25,8 @@ public class TitleController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		FadeController.Instance.FadeOut (1.0f);
+
 		m_playerController.enabled = false;
 
 		//Vector3 panelPosition = m_panelManager.transform.position;

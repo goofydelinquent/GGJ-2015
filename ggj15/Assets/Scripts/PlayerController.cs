@@ -79,13 +79,26 @@ public class PlayerController : MonoBehaviour
 		bIsMoving = false;
 		m_animator.SetBool( "bTurn", true );
 
-		Invoke( "CreditsCallback", 5.0f );
+		Invoke( "FadeToWhite", 5.0f );
 	}
 
-	private void CreditsCallback()
+	private void FadeToWhite()
 	{
 		gameObject.SetActive( false );
 		PanelManager.Instance.gameObject.SetActive( false );
+		Invoke( "CreditsCallback", 2.0f );
+	}
+	
+	private void CreditsCallback()
+	{
+		GameObject go = Instantiate (Resources.Load ("Prefabs/Credits")) as GameObject;
+		go.transform.position = new Vector3( PanelManager.Instance.PanelSize.x * PanelManager.Instance.CurrentPanelIndex, 0, 0 );
+		Invoke( "RestartLevel", 5.0f );
+	}
+
+	private void RestartLevel()
+	{
+		Application.LoadLevel (0);
 	}
 
 	public void ForceSetWalking( bool p_bIsWalking ) {

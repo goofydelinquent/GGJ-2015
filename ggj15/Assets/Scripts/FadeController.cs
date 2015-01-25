@@ -30,11 +30,11 @@ public class FadeController : MonoBehaviour
 	}*/
 
 
-	public void FadeOut()
+	public void FadeOut(float p_time = 0.35f)
 	{
 		iTween.CameraFadeFrom( iTween.Hash(
 			"amount", 1,
-			"time", 0.35f,
+			"time", p_time,
 			"easeType", iTween.EaseType.easeOutCubic ) );
 
 	}
