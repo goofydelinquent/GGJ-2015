@@ -22,7 +22,9 @@ public class PlayerController : MonoBehaviour
 		m_instance = this;
 
 		m_animator = GetComponent<Animator>();
+#if !UNITY_WEBPLAYER
 		Screen.showCursor = false;
+#endif
 	}
 
 	bool bRight = false;
@@ -117,11 +119,7 @@ public class PlayerController : MonoBehaviour
 			return;
 		}
 
-		#if DEBUG_PAT
-		float distance = 5f * Time.fixedDeltaTime * ( bRight ? 1 : -1 );
-		#else
-		float distance = 5f * Time.fixedDeltaTime * ( bRight ? 1 : -1 );
-		#endif
+		float distance = GetSpeed() * Time.fixedDeltaTime * ( bRight ? 1 : -1 );
 
 		if ( bLeft ) {
 			int index = PanelManager.Instance.CurrentPanelIndex;
@@ -134,6 +132,18 @@ public class PlayerController : MonoBehaviour
 		if( bIsMoving ) 
 		{
 			transform.Translate( Vector3.right * distance );
+		}
+	}
+
+	private float GetSpeed()
+	{
+		if( transform.position.x < ( 2 * PanelManager.Instance.PanelSize.x ) ) {
+			return 1.5f;
+		}
+		else {
+			float percentage = ( transform.position.x - ( 2 * PanelManager.Instance.PanelSize.x ) ) / PanelManager.Instance.PanelSize.x;
+
+			return 1.5f + Mathf.Min( 1.5f * percentage, 1.5f );
 		}
 	}
 
