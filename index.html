@@ -15,8 +15,8 @@
 		<script type="text/javascript">
 		<!--
 			var config = {
-				width: 800, 
-				height: 600,
+				width: 1024, 
+				height: 768,
 				params: { enableDebugging:"0" }
 				
 			};
@@ -57,7 +57,7 @@
 						break;
 					}
 				});
-				u.initPlugin(jQuery("#unityPlayer")[0], "Hugo Web.unity3d");
+				u.initPlugin(jQuery("#unityPlayer")[0], "Hugo.unity3d");
 			});
 		-->
 		</script>
@@ -68,6 +68,7 @@
 			background-color: white;
 			color: black;
 			text-align: center;
+
 		}
 		a:link, a:visited {
 			color: #000;
@@ -86,7 +87,7 @@
 		}
 		div.content {
 			margin: auto;
-			width: 800px;
+			width: 1024px;
 		}
 		div.broken,
 		div.missing {
@@ -110,14 +111,13 @@
 		}
 		div#unityPlayer {
 			cursor: default;
-			height: 600px;
-			width: 800px;
+			height: 768px;
+			width: 1024px;
 		}
 		-->
 		</style>
 	</head>
 	<body>
-		<!--p class="header"><span>Unity Web Player | </span>Hugo</p-->
 		<div class="content">
 			<div id="unityPlayer">
 				<div class="missing">
@@ -127,6 +127,5 @@
 				</div>
 			</div>
 		</div>
-		<!--p class="footer">&laquo; created with <a href="http://unity3d.com/unity/" title="Go to unity3d.com">Unity</a> &raquo;</p-->
 	</body>
 </html>
