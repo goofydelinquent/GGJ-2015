@@ -10,11 +10,11 @@ public class Bubble : MonoBehaviour
 
 	public void Awake()
 	{
-		//TweenFade( 0.0f );
+		TweenFade( 0.0f );
 
-		//iTween.Init( gameObject );
+		iTween.Init( gameObject );
 	}
-	/*
+
 	public void Fade( bool p_bIn )
 	{
 		if( p_bIn == m_bActive ) { return; }
@@ -24,7 +24,7 @@ public class Bubble : MonoBehaviour
 			iTween.ValueTo( gameObject, iTween.Hash(
 				"from", 0f,
 				"to", 1f,
-				"time", 1.0f,
+				"time", 0.35f,
 				"onupdatetarget", gameObject,
 				"onupdate", "TweenFade",
 				"easetype", iTween.EaseType.easeOutCubic
@@ -34,13 +34,18 @@ public class Bubble : MonoBehaviour
 			iTween.ValueTo( gameObject, iTween.Hash(
 				"from", 1f,
 				"to", 0f,
-				"time", 1.0f,
+				"time", 0.35f,
 				"onupdatetarget", gameObject,
 				"onupdate", "TweenFade",
 				"easetype", iTween.EaseType.easeOutCubic
 				));
 		}
-	}*/
+	}
+
+	public void SetText( string p_text )
+	{
+		m_text.text = p_text;
+	}
 
 	public void TweenFade( float p_value )
 	{

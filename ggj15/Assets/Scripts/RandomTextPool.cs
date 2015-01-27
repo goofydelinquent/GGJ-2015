@@ -14,44 +14,44 @@ public static class RandomTextPool {
 	private static int m_missedCount = 0;
 
 	private static string[] m_earlyMessages = {
-		"She was...",
+		"She was...\nAll I ever hoped for.",
 		"I thought\nit would be easy.",
 		"I wish she was still the one.",
-		"She would've made\nthis day brighter.",
+		"She'd have made\nthis day brighter.",
 		"We could've picked up\nthe pieces together.",
-		"Follow your heart.",
-		"Please. No more tears.",
-		"It can't be her.\nIt never is.",
+		"I can't help this.\nReturning just to spite myself.",
+		"It's hard to breathe...",
+		"It... can't be her.\nIt never could be.",
 		"I cherished everything.",
-		"I wonder what she's doing.",
-		"How can I find her?",
+		"I wonder what she's doing...",
+		"How do I find her?",
 		"Where is she?",
 		"I can't stop thinking of her.",
 		"How do people last through this?"
 	};
 
 	private static string[] m_midMessages = {
-		"Why do I keep \ncoming back?",
-		"Enough...",
+		"Why do I keep\ncoming back?",
+		"Enough, please. Enough...",
 		"Running through my mind.\nWalking in circles.",
-		"Where am I going? ...\nWhat do I do?",
+		"Where am I going...?\nWhat do I do now?",
 		"Should I keep my heart in this...?",
-		"I know I can do better.",
+		"What did we do wrong?/nWas it me?",
 		"There must be an end to this.",
-		"Maybe this time\nit would be different.",
+		"I want things to be different...",
 		"It must be me.",
 		"It's too hard to hold on.",
-		"Are these dreams or memories? Nightmares?",
+		"Are these dreams or memories?/nNightmares?",
 		"You lose what you cling to.",
 		"I want to get out of here.",
-		"I thought holding on makes us strong but...",
+		"I thought holding on makes us strong\nbut...",
 		"I wonder what she's doing,\nbut I don't want to know."
 	};
 
 	private static string[] m_lateMessages = {
-		"Elsa kept telling me...",
+		"But Elsa kept telling me I should...",
 		"Should I stay\nor should I go?",
-		"I'm just getting worse.",
+		"I'm just getting worse./nHow do I get out of this?",
 		"Do I really need\nto do this to myself?",
 		"I don't need\nto keep hurting myself.",
 		"I feel like I'm going nowhere.",
@@ -63,16 +63,16 @@ public static class RandomTextPool {
 	};
 
 	private static string[] m_goodMessages = {
-		"Finally...",
+		"Something... Something feels different.",
 		"That was... new.",
 		"I think this is right.",
-		"This is what I need.",
+		"Maybe... this is what I need.",
 		"I... feel better.",
 		"That was... a surprising feeling."
 	};
 
 	private static string[] m_bestMessages = {
-		"Almost there.",
+		"One day at a time, I think.",
 		"There's no looking back now.",
 		"Just keep going.",
 		"This could be it.",

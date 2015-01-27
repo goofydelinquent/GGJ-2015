@@ -6,7 +6,7 @@ public class MemoryPanel : Panel
 {	
 	public FocusBeacon m_trigger;
 
-	private TextMesh m_text;
+	private Bubble m_bubble;
 	
 	private float m_distance;
 
@@ -34,11 +34,9 @@ public class MemoryPanel : Panel
 			bubbleObject.transform.position = beacon.GetPosition() + new Vector3( 1, -1, 0 );
 		}
 
-		m_text = bubbleObject.GetComponent<TextMesh>();
+		m_bubble = bubbleObject.GetComponent<Bubble>();
 
-		m_text.gameObject.SetActive( false );
-
-		m_text.text = m_key;
+		m_bubble.SetText( m_key );
 	}
 
 	public bool HasTrigger () {
@@ -61,7 +59,8 @@ public class MemoryPanel : Panel
 
 		m_bCheckForInput = Mathf.Abs(PlayerController.Instance.transform.position.x - m_trigger.transform.position.x) < 1.5f;
 
-		m_text.gameObject.SetActive( m_bCheckForInput );
+		m_bubble.Fade( m_bCheckForInput );
+		//m_text.gameObject.SetActive( m_bCheckForInput );
 
 		if( m_bCheckForInput )
 		{
@@ -72,7 +71,7 @@ public class MemoryPanel : Panel
 				Debug.Log( "KEY DOWN" );
 				ChimePlayer.Instance.PlaySound();
 
-				m_text.gameObject.SetActive( false );
+				m_bubble.gameObject.SetActive( false );
 
 				Sprite memory = m_trigger.transform.GetComponent<Beacon>().Memory;
 
