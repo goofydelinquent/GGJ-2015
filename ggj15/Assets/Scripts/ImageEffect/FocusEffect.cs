@@ -47,7 +47,7 @@ public class FocusEffect : ImageEffectBase {
 		GL.PushMatrix();
 		GL.LoadPixelMatrix( 0, m_screenWidth, m_screenHeight, 0 );
 
-		float scaleFactor = 1024f / m_screenWidth;
+		float scaleFactor = m_screenWidth / 1024f;
 		float minDistance = m_threshold;
 
 		FocusBeacon closest = null;

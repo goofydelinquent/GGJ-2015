@@ -28,6 +28,8 @@ public class CameraController : MonoBehaviour
 
 	protected virtual void Awake()
 	{
+		return;
+
 		camera.orthographic = true;
 		camera.orthographicSize = m_orthoSize;
 

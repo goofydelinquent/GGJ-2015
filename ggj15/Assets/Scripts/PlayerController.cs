@@ -35,14 +35,34 @@ public class PlayerController : MonoBehaviour
 	{		
 		if( !m_bIsEndCutscene ) {
 
-			bRight = Input.GetKey( KeyCode.RightArrow );
+#if UNITY_ANDROID && !UNITY_EDITOR
 
+			if( Input.touchCount == 1 )
+			{
+				bRight = Input.GetTouch( 0 ).position.x > Screen.width * 0.75f;
+
+				if( !bRight ) {
+					bLeft = Input.GetTouch( 0 ).position.x < Screen.width * 0.25f;
+				}
+				else {
+					bLeft = false;
+				}
+			}
+			else{
+				bLeft = false;
+				bRight = false;
+			}
+#else
+			bRight = Input.GetKey( KeyCode.RightArrow );
+			
 			if( !bRight ) {
 				bLeft = Input.GetKey( KeyCode.LeftArrow );
 			}
 			else {
 				bLeft = false;
 			}
+#endif
+
 		}
 
 		bIsMoving = bRight || bLeft;
@@ -123,8 +143,8 @@ public class PlayerController : MonoBehaviour
 
 		if ( bLeft ) {
 			int index = PanelManager.Instance.CurrentPanelIndex;
-			float minX = (PanelManager.Instance.PanelSize.x * index );
-			if ( transform.position.x + distance < minX ) {
+			float minX = (PanelManager.Instance.PanelSize.x * index ) + 0.25f;
+			if ( transform.position.x < minX ) {
 				bIsMoving = false;
 			}
 		}

@@ -31,7 +31,7 @@ public class MemoryPanel : Panel
 		Beacon beacon = m_trigger.GetComponent<Beacon>();
 
 		if( beacon != null ) {
-			bubbleObject.transform.position = beacon.GetPosition() + new Vector3( 1, -1, 0 );
+			bubbleObject.transform.position = beacon.GetPosition() + Quaternion.AngleAxis( UnityEngine.Random.value * 360.0f, Vector3.back ) * Vector3.up;
 		}
 
 		m_bubble = bubbleObject.GetComponent<Bubble>();
@@ -64,7 +64,19 @@ public class MemoryPanel : Panel
 
 		if( m_bCheckForInput )
 		{
-			if( Input.GetKeyDown( (KeyCode)Enum.Parse( typeof( KeyCode ), m_key ) ) )
+			bool bPass = false;
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+			if( Input.touchCount == 1 )
+			{
+				if( Vector3.Distance( Camera.main.WorldToScreenPoint( m_bubble.transform.position ), Input.GetTouch( 0 ).position ) < 200 ) {
+					bPass = true;
+				}
+			}
+#else
+			bPass = Input.GetKeyDown( (KeyCode)Enum.Parse( typeof( KeyCode ), m_key ) );
+#endif
+			if( bPass )
 			{
 				PanelManager.Instance.AddSequence();
 

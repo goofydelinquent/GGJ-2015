@@ -44,7 +44,11 @@ public class Bubble : MonoBehaviour
 
 	public void SetText( string p_text )
 	{
+		#if UNITY_ANDROID && !UNITY_EDITOR
+		m_text.text = "";
+		#else
 		m_text.text = p_text;
+		#endif
 	}
 
 	public void TweenFade( float p_value )
