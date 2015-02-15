@@ -5,14 +5,30 @@ public class Bubble : MonoBehaviour
 {	
 	[SerializeField] private TextMesh m_text;
 	[SerializeField] private SpriteRenderer m_spriteBg;
-	
+	[SerializeField] private SpriteRenderer m_spriteCircle;
+
 	private bool m_bActive = false;
 
 	public void Awake()
 	{
 		TweenFade( 0.0f );
 
+		m_spriteBg.transform.Rotate( Vector3.back, Random.value * 360.0f );
+		m_spriteCircle.transform.Rotate( Vector3.back, Random.value * 360.0f );
+
+		#if UNITY_ANDROID
+			m_text.gameObject.SetActive( false );
+		#else
+		m_spriteCircle.gameObject.SetActive( false );
+		#endif
+
 		iTween.Init( gameObject );
+	}
+
+	private void Update()
+	{
+		m_spriteBg.transform.Rotate( Vector3.back, 2 * Time.deltaTime );
+		m_spriteCircle.transform.Rotate( Vector3.back, 10 * Time.deltaTime );
 	}
 
 	public void Fade( bool p_bIn )
@@ -44,7 +60,7 @@ public class Bubble : MonoBehaviour
 
 	public void SetText( string p_text )
 	{
-		#if UNITY_ANDROID && !UNITY_EDITOR
+		#if UNITY_ANDROID
 		m_text.text = "";
 		#else
 		m_text.text = p_text;
@@ -54,7 +70,8 @@ public class Bubble : MonoBehaviour
 	public void TweenFade( float p_value )
 	{
 		Color color = new Color( 1, 1, 1, p_value );
-		renderer.material.color = color;
+		m_text.renderer.material.color = color;
 		m_spriteBg.color = color;
+		m_spriteCircle.color = color;
 	}
 }

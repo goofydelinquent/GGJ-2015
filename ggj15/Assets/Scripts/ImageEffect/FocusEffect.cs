@@ -19,14 +19,14 @@ public class FocusEffect : ImageEffectBase {
 
 	public 	float 		m_threshold = 50f;
 	private float		m_plateau = 0.5f;
-	
-	void Start () {
 
+	void Start () {
 		m_screenWidth = Screen.width;
 		m_screenHeight = Screen.height;
 
 		rt = new RenderTexture( m_screenWidth, m_screenHeight, 32 );
 		Graphics.Blit( m_baseTexture, rt );
+		rt.DiscardContents();
 	}
 
 	void OnRenderImage (RenderTexture source, RenderTexture destination) {
@@ -74,13 +74,12 @@ public class FocusEffect : ImageEffectBase {
 			float size = b.m_radius * scaleFactor;
 
 			float yPosition = position.y;
-			if ( ! ( Application.platform == RuntimePlatform.WindowsEditor 
-			        || Application.platform == RuntimePlatform.WindowsPlayer 
-			        || Application.platform == RuntimePlatform.WindowsWebPlayer ) ) {
+
+#if !UNITY_UV_STARTS_AT_TOP
 				yPosition = m_screenHeight - yPosition;
-			} else {
+#else
 				yPosition = position.y;
-			}
+#endif
 
 			int index =  Mathf.FloorToInt( ( Time.timeSinceLevelLoad / m_interval ) % m_textureFocuses.Count );
 
@@ -102,5 +101,6 @@ public class FocusEffect : ImageEffectBase {
 
 		material.SetTexture("_FocusTex", rt );
 		Graphics.Blit( source, destination, material );
+		rt.DiscardContents();
 	}
 }

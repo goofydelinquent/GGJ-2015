@@ -163,7 +163,7 @@ public class PlayerController : MonoBehaviour
 		else {
 			float percentage = ( transform.position.x - ( 2 * PanelManager.Instance.PanelSize.x ) ) / PanelManager.Instance.PanelSize.x;
 
-			return 1.5f + Mathf.Min( 1.5f * percentage, 1.5f );
+			return 1.5f + Mathf.Min( 1.0f * percentage, 1.0f );
 		}
 	}
 

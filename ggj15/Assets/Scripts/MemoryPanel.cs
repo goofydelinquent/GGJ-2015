@@ -31,7 +31,10 @@ public class MemoryPanel : Panel
 		Beacon beacon = m_trigger.GetComponent<Beacon>();
 
 		if( beacon != null ) {
-			bubbleObject.transform.position = beacon.GetPosition() + Quaternion.AngleAxis( UnityEngine.Random.value * 360.0f, Vector3.back ) * Vector3.up;
+			//bubbleObject.transform.position = beacon.GetPosition() + Quaternion.AngleAxis( UnityEngine.Random.value * 360.0f, Vector3.back ) * Vector3.up;
+			Vector3 panelMid = PanelManager.Instance.PanelSize * 0.75f;
+			Vector3 offset = ( panelMid - beacon.transform.localPosition ).normalized * 1.5f;
+			bubbleObject.transform.localPosition = beacon.transform.localPosition + offset;
 		}
 
 		m_bubble = bubbleObject.GetComponent<Bubble>();
@@ -69,7 +72,7 @@ public class MemoryPanel : Panel
 #if UNITY_ANDROID && !UNITY_EDITOR
 			if( Input.touchCount == 1 )
 			{
-				if( Vector3.Distance( Camera.main.WorldToScreenPoint( m_bubble.transform.position ), Input.GetTouch( 0 ).position ) < 200 ) {
+				if( Vector3.Distance( Camera.main.WorldToScreenPoint( m_bubble.transform.position ), Input.GetTouch( 0 ).position ) < 100 ) {
 					bPass = true;
 				}
 			}
@@ -117,3 +120,4 @@ public class MemoryPanel : Panel
 		return chars[ UnityEngine.Random.Range( 0, chars.Length )].ToString();
 	}
 }
+

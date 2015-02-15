@@ -15,4 +15,9 @@ public class Panel : MonoBehaviour
 	{
 
 	}
+
+	public void Show( bool p_bShow )
+	{
+		gameObject.SetActive( p_bShow );
+	}
 }

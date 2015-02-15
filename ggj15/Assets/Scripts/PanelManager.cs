@@ -205,7 +205,7 @@ public class PanelManager : MonoBehaviour
 	{
 		m_currentPanelIndex++;
 
-		Debug.Log( "Incrementing Current Index. Now at: " + m_currentPanelIndex );
+		//Debug.Log( "Incrementing Current Index. Now at: " + m_currentPanelIndex );
 
 		// Current Node set.
 		if( m_node == null ) {
@@ -249,7 +249,7 @@ public class PanelManager : MonoBehaviour
 			Debug.Log( "DESTROY" );
 		}
 
-		Debug.Log("COUNT A: " + m_list.Count);
+		//Debug.Log("COUNT A: " + m_list.Count);
 
 		//Debug.Log( "Current panel index: " + m_currentPanelIndex );
 

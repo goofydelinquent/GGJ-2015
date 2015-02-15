@@ -3,7 +3,12 @@ using System.Collections;
 
 public class MyCameraController : CameraController
 {
-	private const int FRAME_RATE_TARGET		= 60;
+#if UNITY_ANDROID
+	private const int FRAME_RATE_TARGET	= 45;
+#else
+	private const int FRAME_RATE_TARGET	= 60;
+#endif
+
 	private Vector3 m_offset = Vector3.zero;
 	private bool m_bIsFollowingPlayer = true;
 
@@ -55,6 +60,7 @@ public class MyCameraController : CameraController
 		targetPosition.y = m_offset.y;
 		targetPosition.z = m_offset.z;
 		transform.position = Vector3.SmoothDamp( transform.position, targetPosition, ref velocity, m_dampValue );
+		//transform.position = targetPosition;
 	}
 
 	public Vector3 GetTargetPosition()
