@@ -13,7 +13,7 @@ public class Quote : MonoBehaviour
 
 		m_text.text = "";
 
-		m_color = renderer.material.color;
+		m_color = GetComponent<Renderer>().material.color;
 
 		TweenFade( 0.0f );
 
@@ -36,6 +36,6 @@ public class Quote : MonoBehaviour
 
 	public void TweenFade( float p_value )
 	{
-		renderer.material.color = new Color( m_color.r, m_color.g, m_color.b, p_value );
+		GetComponent<Renderer>().material.color = new Color( m_color.r, m_color.g, m_color.b, p_value );
 	}
 }

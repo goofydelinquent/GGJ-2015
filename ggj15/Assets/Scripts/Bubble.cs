@@ -70,7 +70,7 @@ public class Bubble : MonoBehaviour
 	public void TweenFade( float p_value )
 	{
 		Color color = new Color( 1, 1, 1, p_value );
-		m_text.renderer.material.color = color;
+		m_text.GetComponent<Renderer>().material.color = color;
 		m_spriteBg.color = color;
 		m_spriteCircle.color = color;
 	}

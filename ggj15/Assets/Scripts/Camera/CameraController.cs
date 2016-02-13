@@ -30,37 +30,37 @@ public class CameraController : MonoBehaviour
 	{
 		return;
 
-		camera.orthographic = true;
-		camera.orthographicSize = m_orthoSize;
+		GetComponent<Camera>().orthographic = true;
+		GetComponent<Camera>().orthographicSize = m_orthoSize;
 
 		float targetAspectRatio = m_aspectRatioWidth / m_aspectRatioHeight;
 
-		float idealHeight = camera.orthographicSize * 2.0f;
+		float idealHeight = GetComponent<Camera>().orthographicSize * 2.0f;
 		float idealWidth = targetAspectRatio * idealHeight;
 
-		m_height = camera.orthographicSize * 2.0f;
-		m_width = camera.aspect * m_height;
+		m_height = GetComponent<Camera>().orthographicSize * 2.0f;
+		m_width = GetComponent<Camera>().aspect * m_height;
 		
-		if( camera.aspect < targetAspectRatio )
+		if( GetComponent<Camera>().aspect < targetAspectRatio )
 		{ // Current is more rectangle than ideal. Increase ortho size to fit width.
 
 			float scaleFactor = idealWidth / m_width;
-			camera.orthographicSize *= scaleFactor;
+			GetComponent<Camera>().orthographicSize *= scaleFactor;
 		}
 		else
 		{ // Current is more square than ideal. Decrease ortho size to fit width.
 
 			float scaleFactor = m_width / idealWidth;
-			camera.orthographicSize /= scaleFactor;
+			GetComponent<Camera>().orthographicSize /= scaleFactor;
 		}
 
-		m_height = camera.orthographicSize * 2.0f;
-		m_width = camera.aspect * m_height;
+		m_height = GetComponent<Camera>().orthographicSize * 2.0f;
+		m_width = GetComponent<Camera>().aspect * m_height;
 
 		float defaultPixelsToUnit = 100.0f;
 		print( "Ideal Aspect Ratio: " + targetAspectRatio );
-		print( "Current Aspect Ratio: " + camera.aspect );
-		print( "Current Ortho Size: " + camera.orthographicSize );
+		print( "Current Aspect Ratio: " + GetComponent<Camera>().aspect );
+		print( "Current Ortho Size: " + GetComponent<Camera>().orthographicSize );
 		print( "Screen Resolution : ( " + Screen.width + ", " + Screen.height + " )" );
 		print( "Game Resolution : ( " + m_width + ", " + m_height + " )" );
 		print( "Canvas Resolution : ( " + m_width * defaultPixelsToUnit + ", " + m_height * defaultPixelsToUnit + " )" );

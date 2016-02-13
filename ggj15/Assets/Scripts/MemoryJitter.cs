@@ -17,20 +17,20 @@ public class MemoryJitter : MonoBehaviour {
 
 	void OnDisable () {
 		this.transform.localPosition = m_originalPosition;
-		Color c = this.renderer.material.color;
+		Color c = this.GetComponent<Renderer>().material.color;
 		c.a = 1f;
-		this.renderer.material.color = c;
+		this.GetComponent<Renderer>().material.color = c;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 
-		Color c = this.renderer.material.color;
+		Color c = this.GetComponent<Renderer>().material.color;
 
-		if ( this.renderer.material.color.a < 1f ) {
+		if ( this.GetComponent<Renderer>().material.color.a < 1f ) {
 			if ( Random.Range( 0, 100 ) < 40 ) {
 				c.a = 1f;
-				this.renderer.material.color = c;
+				this.GetComponent<Renderer>().material.color = c;
 			}
 		}
 
@@ -47,7 +47,7 @@ public class MemoryJitter : MonoBehaviour {
 
 		//if ( Random.Range( 0, 100 ) < 50 ) {
 			c.a = 0.7f;
-			this.renderer.material.color = c;
+			this.GetComponent<Renderer>().material.color = c;
 		//}
 
 

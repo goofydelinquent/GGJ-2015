@@ -14,7 +14,7 @@ public class RendererSort : MonoBehaviour
 
 	private void Awake()
 	{
-		renderer.sortingLayerName = m_sortingLayer;	
-		renderer.sortingOrder = m_oderInLayer;
+		GetComponent<Renderer>().sortingLayerName = m_sortingLayer;	
+		GetComponent<Renderer>().sortingOrder = m_oderInLayer;
 	}
 }

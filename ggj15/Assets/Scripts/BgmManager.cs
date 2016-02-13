@@ -40,6 +40,7 @@ public class BgmManager : MonoBehaviour {
 			GameObject current = new GameObject( "Buffer " + i );
 			current.transform.parent = this.transform;
 			AudioSource src = current.AddComponent<AudioSource>();
+			src.playOnAwake = false;
 			m_trackBuffers.Add( src );
 			
 		}
@@ -79,7 +80,7 @@ public class BgmManager : MonoBehaviour {
 		if ( m_currentBufferIndex >= 0 ) {
 			
 			m_trackBuffers[ m_currentBufferIndex ].Play();
-			SetNextTrack( MusicType.Intro, true );
+			//SetNextTrack( MusicType.Intro, true );
 			
 		}
 
@@ -113,7 +114,7 @@ public class BgmManager : MonoBehaviour {
 			current.loop = false;
 
 			if ( ! p_forceToFade ) {
-				timeLeft = current.audio.clip.length - current.time; 
+				timeLeft = current.GetComponent<AudioSource>().clip.length - current.time; 
 			} else {
 				timeLeft = m_fadeTime;
 				m_bIsFading = true;

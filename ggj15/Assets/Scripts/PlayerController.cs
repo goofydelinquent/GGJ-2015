@@ -22,9 +22,10 @@ public class PlayerController : MonoBehaviour
 		m_instance = this;
 
 		m_animator = GetComponent<Animator>();
+		/*
 #if !UNITY_WEBPLAYER
-		Screen.showCursor = false;
-#endif
+		Cursor.visible = false;
+#endif*/
 	}
 
 	bool bRight = false;

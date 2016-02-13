@@ -8,7 +8,7 @@ public class ChimePlayer : MonoBehaviour {
 	public static ChimePlayer Instance { get { return m_instance; } }
 
 	public void PlaySound() {
-		this.audio.Play();
+		this.GetComponent<AudioSource>().Play();
 	}
 
 	void Awake () {

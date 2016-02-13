@@ -70,10 +70,10 @@ public class TitleController : MonoBehaviour {
 
 			} else {
 				m_background.transform.Translate( 0f, Time.deltaTime * 0.4f, 0f );
-				Color c = m_title.renderer.material.color;
+				Color c = m_title.GetComponent<Renderer>().material.color;
 				c.a = m_curScrollTimeLeft / m_timeToScrollBg;
-				m_title.renderer.material.color = c;
-				m_background.renderer.material.color = c;
+				m_title.GetComponent<Renderer>().material.color = c;
+				m_background.GetComponent<Renderer>().material.color = c;
 
 			}
 
@@ -82,9 +82,9 @@ public class TitleController : MonoBehaviour {
 			m_curFadeInTimeLeft -= Time.deltaTime;
 			if ( m_curFadeInTimeLeft <= 0f ) {
 			} else {
-				Color c = m_cover.renderer.material.color;
+				Color c = m_cover.GetComponent<Renderer>().material.color;
 				c.a = m_curFadeInTimeLeft / m_timeToFadeIn;
-				m_cover.renderer.material.color = c;
+				m_cover.GetComponent<Renderer>().material.color = c;
 
 				if ( m_curFadeInTimeLeft < 2f ) {
 					m_playerController.ForceSetWalking( false );
