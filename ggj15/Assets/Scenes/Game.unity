@@ -586,6 +586,26 @@ Prefab:
       propertyPath: m_camera
       value: 
       objectReference: {fileID: 1522855462}
+    - target: {fileID: 19831344, guid: 9b76e779d20b14ceda17f57d87bd6ff6, type: 2}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 19831344, guid: 9b76e779d20b14ceda17f57d87bd6ff6, type: 2}
+      propertyPath: ShapeModule.boxX
+      value: 7.38206
+      objectReference: {fileID: 0}
+    - target: {fileID: 19831344, guid: 9b76e779d20b14ceda17f57d87bd6ff6, type: 2}
+      propertyPath: ShapeModule.boxZ
+      value: 2.3278165
+      objectReference: {fileID: 0}
+    - target: {fileID: 19831344, guid: 9b76e779d20b14ceda17f57d87bd6ff6, type: 2}
+      propertyPath: VelocityModule.x.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19831344, guid: 9b76e779d20b14ceda17f57d87bd6ff6, type: 2}
+      propertyPath: VelocityModule.z.scalar
+      value: -0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9b76e779d20b14ceda17f57d87bd6ff6, type: 2}
   m_IsPrefabParent: 0

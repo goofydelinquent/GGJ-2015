@@ -74,14 +74,20 @@ public class BgmManager : MonoBehaviour {
 		m_instance = null;
 	}
 
+	private void DelayedStart()
+	{
+		SetNextTrack( MusicType.Intro, true );		
+	}
+
 	// Use this for initialization
 	void Start () {
 		
 		if ( m_currentBufferIndex >= 0 ) {
 			
 			m_trackBuffers[ m_currentBufferIndex ].Play();
+			m_trackBuffers [m_currentBufferIndex].loop = true;
 			//SetNextTrack( MusicType.Intro, true );
-			
+			//Invoke( "DelayedStart", 0f );
 		}
 
 		//SetNextTrack(MusicType.Body, false );

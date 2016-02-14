@@ -246,7 +246,7 @@ public class PanelManager : MonoBehaviour
 			LinkedListNode<Panel> node = m_list.First;
 			m_list.RemoveFirst();
 			Destroy( node.Value.gameObject );
-			Debug.Log( "DESTROY" );
+			//Debug.Log( "DESTROY" );
 		}
 
 		//Debug.Log("COUNT A: " + m_list.Count);
@@ -286,7 +286,7 @@ public class PanelManager : MonoBehaviour
 		{
 			if( m_list.Count <= 4 ) {
 				m_bTryToEnd = true;
-				Debug.Log( "TRY TO END" );
+				//.Log( "TRY TO END" );
 			}
 		}
 	}

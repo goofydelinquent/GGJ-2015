@@ -49,9 +49,16 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e70ba84a048a48edaf28c3a7b001deb, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_clips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 41169aa95d9004251a090933292963d4, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 151040}
   m_IsPrefabParent: 1
-  m_IsExploded: 1
